@@ -1,0 +1,13 @@
+.f-sz {
+    width: 50px; /* Đặt chiều rộng của icon */
+    height: 50px; /* Đặt chiều cao của icon */
+    border-radius: 50%; /* Làm tròn viền để tạo hình dạng tròn */
+    background-color: #ccc; /* Đặt màu nền xám cho icon */
+    border: 2px solid #333; /* Đặt viền 2px màu đen cho icon */
+    display: inline-block; /* Để icon hiển thị trên cùng một dòng */
+    text-align: center; /* Căn giữa nội dung trong icon */
+    line-height: 50px; /* Điều chỉnh dòng chữ theo chiều cao của icon */
+    font-size: 24px; /* Đặt kích thước chữ */
+    color: #333; /* Đặt màu chữ */
+    margin: 10px; /* Đặt khoảng cách giữa các icon */
+}

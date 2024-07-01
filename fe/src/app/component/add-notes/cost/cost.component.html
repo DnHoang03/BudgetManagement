@@ -1,0 +1,20 @@
+<p>cost works!</p>
+<mat-grid-list cols="6" rowHeight="100px" gutterSize="20px">
+    <mat-grid-tile *ngFor="let icon of icons">
+        <i class="{{icon.url}} f-sz" (click)="setAdd(icon)" [style]="iconAdding == icon ? 'backgroundColor: yellow;':''"></i>
+    </mat-grid-tile>
+</mat-grid-list>
+<div *ngIf="isAdding">
+    <form [formGroup]="iconForm" (ngSubmit)="createNote()">
+        <input formControlName="amount" type="number">
+        <input formControlName="createdAt" type="datetime">
+        <input formControlName="note" type="text">
+        <input formControlName="imageUrl" type="hidden">
+        <input formControlName="iconId" type="hidden" [value]="iconAdding.id">
+        <input formControlName="userId" type="hidden">
+        <button type="submit">Click here</button>
+    </form>
+</div>
+<app-input *ngIf="isAdding">
+    
+</app-input>

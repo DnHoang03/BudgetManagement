@@ -1,0 +1,43 @@
+Budget_management
+Bao gồm 5 màn chính: 
++ add-notes: Thêm các ghi chú về việc chi tiêu và các transaction
+    - Trong trang add-notes sẽ có 3 trang con gồm cost, income và transaction, mặc định khi vào trang add-note sẽ 
+    vào trang cost.
+    - Khi vào trang cost, ứng dụng sẽ gọi api get các khoản chi tiêu đã được tạo. 
+    -> Ấn vào một khoản chi tiêu sẽ gọi trang input lên để nhập khoản chi tiêu
+    , sau đó người dùng submit để và ứng dụng sẽ gọi api post để lưu 1 note về chi tiêu.
+
+    - Khi vào trang income, ứng dụng sẽ gọi api get các khoản thu nhập đã được tạo. 
+    -> Ấn vào một khoản thu nhập sẽ gọi trang input lên để nhập khoản thu nhập
+    , sau đó người dùng submit để và ứng dụng sẽ gọi api post để lưu 1 note về thu nhập.
+
+    -Ngoài ra, tại mỗi trang cost hoặc income, chúng ta có thể vào tran cài đặt danh mục để xem các danh mục chi tiêu mà chúng 
+    ta đã tạo ra, tại đây, api get các danh mục từ phía backend được gọi, chúng ta có thể thực hiện thêm danh mục. Click 
+    vào thêm danh mục sẽ điều hướng đến một trang mới, trang này gọi api liệt kê các icon đại diện cho từng danh mục. Click vào icon 
+    và nhập tên sẽ thực hiện 1 api post tạo 1 danh mục mới.
+
+    - Khi vào trang transaction, ứng dụng sẽ gọi api để get danh sách các tài khoản đã tạo, người dùng
+    chọn tài khoản gửi và tài khoản đích, nhập vào trang input để ứng dụng gửi api post lưu transaction
+
++ chart: Biểu đồ thống kê chi phí và thu nhập theo năm tháng.
+    - Trang sẽ bao gồm 2 biểu đồ theo tháng và năm, trang chart sẽ có 2 trang con là chi phí và thu nhập.
+    - Tại mỗi trang sẽ có các danh sách các khoản chi theo thời gian được lấy từ api. Nhấn vào mỗi khoản chi sẽ hiện 
+    lên chi tiết các khoản đó.
+    -> Phần này em chưa làm và nó liên quan đến vẽ biểu đồ và thống kê nhiều nên em chưa tìm hiểu kĩ lắm ạ.
+
++ home: Trang chủ, liệt kê các khoản chi tiêu, danh sách note đã ghi lại theo từng tháng
+    - Khi vào trang này, một api sẽ được gọi đến backend để get danh sách các khoản chi tiêu, thu nhập, giao dịch trong tháng,
+    chúng ta có thể click vào từng note để xem chi tiết -> call api chi tiết của note đó.
+    - Khi xem chi tiết chúng ta có thể chỉnh sửa, lúc này thì trang sẽ điều hướng đến trang add-note để thực hiện chỉnh sửa note, hoặc xóa note.
+
++ report: Thống kê chi tiêu hàng tháng và quản lý tài khoản
+    - Tại trang này, có 2 trang con là analyse và account.
+    - Trang analyse sẽ bao gồm ngân sách mà chúng ta chi ra hàng tháng , ngân sách cho từng khoản chi tiêu
+    và thống kê chi thu hàng tháng, trang này sẽ có các api get ngân sách theo tháng,tạo và chỉnh sửa ngân sách hàng tháng user, chỉnh sửa ngân sách cho từng khoản chi tiêu.
+    - Trang account sẽ bao gồm chi tiết tài sản, nợ, danh sách các tài khoản, khoản nợ, nợ phải trả, được lấy từ api ở backend.
+    Trang này sẽ có 2 trang con là create-account và manage-account, sẽ thực hiện chức năng tạo tài khoản và quản lý tài khoản.
+    - Trang create-account sẽ nhập thông tin tài khoản và post lên backend.
+    - Trang manage-account sẽ có thể gửi các api put, delete lên để update hoặc xóa tài khoản. 
+
++ profile: Thông tin user.
+    - các tính năng của user em chưa làm kĩ lắm nên xin phép trình bày sau ạ.

@@ -1,0 +1,21 @@
+<p>create-account works!</p>
+<form action="">
+    <mat-form-field class="example-full-width">
+        <mat-label>Favorite food</mat-label>
+        <input matInput placeholder="Ex. Pizza" value="Sushi">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Cars</mat-label>
+        <select matNativeControl required>
+        <option value="Mặc định">Mặc định</option>
+        <option *ngFor="let account_type of accountTypes" [value]="account_type.name">{{account_type.name}}</option>
+        </select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Cars</mat-label>
+        <select matNativeControl required>
+        <option value="Mặc định">Mặc định</option>
+        <option *ngFor="let currency of currencies" [value]="currency.name">{{currency.name}}</option>
+        </select>
+      </mat-form-field>
+</form>
