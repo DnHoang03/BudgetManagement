@@ -23,11 +23,6 @@ public class BudgetPerCategoryService {
         return budgetPerCategoryRepository.findAll().stream().map(this::mapToDto).toList();
     }
 
-    public BudgetPerCategoryDto updateBudget(BudgetPerCategoryDto budgetPerCategoryDto) {
-        budgetPerCategoryRepository.save(mapToEntity(budgetPerCategoryDto));
-        return budgetPerCategoryDto;
-    }
-
 
 
     private BudgetPerCategory mapToEntity(BudgetPerCategoryDto budgetPerCategory) {

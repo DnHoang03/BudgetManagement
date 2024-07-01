@@ -37,7 +37,13 @@ public class AccountNotesService {
         return accountNotesRepository.findByAccountId(id).stream().map(this::mapToDto).toList();
     }
 
-    public AccountNotesDto updateAccountNote(AccountNotesDto accountNotesDto) {
+    public AccountNotesDto updateAccountNote(AccountNotesDto accountNotesDto, Long id) {
+        AccountNotes accountNotes = accountNotesRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found accountnote"));
+        accountNotes.setNote(accountNotesDto.getNote());
+        accountNotes.setAmount(accountNotesDto.getAmount());
+        accountNotes.setImageUrl(accountNotesDto.getImageUrl());
+        accountNotes.setIconNotes(iconNotesRepository.findById(accountNotesDto.getIconNotesId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found iconnote")));
+        accountNotes.setAccount(accountsRepository.findById(accountNotesDto.getAccountId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found account")));
         return mapToDto(accountNotesRepository.save(mapToEntity(accountNotesDto)));
     }
 

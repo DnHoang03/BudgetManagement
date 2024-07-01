@@ -31,8 +31,8 @@ public class NotesController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<NotesDto> updateNote(@RequestBody NotesDto notesDto) {
-        return ResponseEntity.ok(notesService.updateNote(notesDto));
+    public ResponseEntity<NotesDto> updateNote(@RequestBody NotesDto notesDto, @PathVariable("id") Long id) {
+        return ResponseEntity.ok(notesService.updateNote(notesDto, id));
     }
 
     @DeleteMapping("/{id}")

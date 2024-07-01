@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -32,8 +33,13 @@ public class NotesService {
         return mapToDto(notesRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found note")));
     }
 
-    public NotesDto updateNote(NotesDto notesDto) {
-        return mapToDto(notesRepository.save(mapToEntity(notesDto)));
+    public NotesDto updateNote(NotesDto notesDto, Long id) {
+        Notes notes = notesRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found note"));
+        notes.setNote(notesDto.getNote());
+        notes.setImageUrl(notesDto.getImageUrl());
+        notes.setAmount(notesDto.getAmount());
+        notes.setIconNotes(iconNotesRepository.findById(notesDto.getIconNotesId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found iconnote")));
+        return mapToDto(notesRepository.save(notes));
     }
 
     public void deleteNote(Long id) {

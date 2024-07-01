@@ -29,7 +29,14 @@ public class AccountsService {
         return accountsRepository.findByUserId(id).stream().map(this::mapToDto).toList();
     }
 
-    public AccountsDto updateAccount(AccountsDto accountsDto) {
+    public AccountsDto updateAccount(AccountsDto accountsDto, Long id) {
+        Accounts accounts = accountsRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found account"));
+        accounts.setAmount(accountsDto.getAmount());
+        accounts.setName(accountsDto.getName());
+        accounts.setIcon(iconsRepository.findById(accountsDto.getIconId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found icon")));
+        accounts.setNote(accountsDto.getNote());
+        accounts.setCurrency(currenciesRepository.findById(accountsDto.getCurrencyId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found currency")));
+        accounts.setAccountType(accountTypesRepository.findById(accountsDto.getAccountTypeId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found accounttype")));
         return mapToDto(accountsRepository.save(mapToEntity(accountsDto)));
     }
 

@@ -27,8 +27,8 @@ public class AccountsController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AccountsDto> updateAccount(@RequestBody AccountsDto accountsDto) {
-        return ResponseEntity.ok(accountsService.updateAccount(accountsDto));
+    public ResponseEntity<AccountsDto> updateAccount(@RequestBody AccountsDto accountsDto, @PathVariable("id") Long id) {
+        return ResponseEntity.ok(accountsService.updateAccount(accountsDto, id));
     }
 
     @DeleteMapping("/{id}")

@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -29,8 +30,12 @@ public class TransactionsService {
         return transactionsRepository.findByTransferAccountId(id).stream().map(this::mapToDto).toList();
     }
 
-    public TransactionsDto updateTransaction(TransactionsDto transactionsDto) {
-        return mapToDto(transactionsRepository.save(mapToEntity(transactionsDto)));
+    public TransactionsDto updateTransaction(TransactionsDto transactionsDto, Long id) {
+        Transactions transactions = transactionsRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found transaction"));
+        transactions.setAmount(transactionsDto.getAmount());
+        transactions.setTransferAccount(accountsRepository.findById(transactionsDto.getTransferAccountId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found tranfer account")));
+        transactions.setReceiveAccount(accountsRepository.findById(transactionsDto.getReceiveAccountId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found receive account")));
+        return mapToDto(transactionsRepository.save(transactions));
     }
 
     public void deleteTransaction(Long id) {

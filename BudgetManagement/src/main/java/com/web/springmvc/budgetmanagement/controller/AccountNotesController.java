@@ -37,8 +37,8 @@ public class AccountNotesController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AccountNotesDto> updateAccountNote(@RequestBody AccountNotesDto accountNotesDto) {
-        return ResponseEntity.ok(accountNotesService.updateAccountNote(accountNotesDto));
+    public ResponseEntity<AccountNotesDto> updateAccountNote(@RequestBody AccountNotesDto accountNotesDto, @PathVariable Long id) {
+        return ResponseEntity.ok(accountNotesService.updateAccountNote(accountNotesDto, id));
     }
 
     @DeleteMapping("/{id}")
