@@ -1,14 +1,12 @@
 package com.web.springmvc.budgetmanagement.controller;
 
+import com.web.springmvc.budgetmanagement.dto.AccountReportResponse;
 import com.web.springmvc.budgetmanagement.dto.AccountsDto;
-import com.web.springmvc.budgetmanagement.model.Accounts;
 import com.web.springmvc.budgetmanagement.service.AccountsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/accounts")
@@ -17,8 +15,13 @@ public class AccountsController {
     private final AccountsService accountsService;
 
     @GetMapping
-    public ResponseEntity<List<AccountsDto>> getAllAccounts() {
-        return ResponseEntity.ok(accountsService.getAllAccountsByUserId(1L));
+    public ResponseEntity<AccountReportResponse> getAllAccounts() {
+        return ResponseEntity.ok(accountsService.getResponseAccountByUserId(1L));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AccountsDto> getAccountById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(accountsService.getAccountById(id));
     }
 
     @PostMapping

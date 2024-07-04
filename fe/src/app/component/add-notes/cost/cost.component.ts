@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Icon } from '../../../model/icon';
 import { CostService } from '../../../service/cost.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { NotesService } from '../../../service/notes.service';
-import { Note } from '../../../model/note';
 import { IconService } from '../../../service/icon.service';
 
 @Component({
@@ -13,7 +11,6 @@ import { IconService } from '../../../service/icon.service';
 })
 export class CostComponent implements OnInit{
   icons:Icon[] = [];
-  note!:Note;
   iconForm:FormGroup = new FormGroup({
     amount: new FormControl(''),
     createdAt: new FormControl(''),
@@ -23,9 +20,9 @@ export class CostComponent implements OnInit{
     userId: new FormControl('')
   });
 
-  isAdding:boolean = false;
+  isAdding:boolean = true;
   iconAdding!:Icon;
-  constructor(private costService:CostService, private formBuilder:FormBuilder, private notesService:NotesService, private iconService:IconService){
+  constructor(private costService:CostService, private formBuilder:FormBuilder, private iconService:IconService){
   }
 
   // getIcons() {
@@ -34,11 +31,6 @@ export class CostComponent implements OnInit{
   //   });
   // }
 
-  createNote() {
-    return this.notesService.createNote(Object.assign(this.note, this.iconForm)).subscribe(icon => {
-      return icon;
-    });
-  }
 
   setAdd(icon:Icon) {
     this.isAdding = true;

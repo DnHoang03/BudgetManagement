@@ -3,7 +3,41 @@
     max-width: 500px;
     width: 100%;
   }
-  
-  .example-full-width {
-    width: 100%;
-  }
+.custom-text {
+  color: white;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 650px;
+  height: 100%;
+  gap: 20px;
+  padding: 20px;
+}
+mat-form-field {
+  width: 100%;
+}
+.icon {
+  width: 50px; /* Điều chỉnh kích thước của icon */
+  height: 50px; /* Điều chỉnh kích thước của icon */
+  border: 2px solid #000; /* Điều chỉnh độ dày và màu sắc của viền */
+  margin-top: 10px;
+  border-radius: 20%; /* Làm viền của icon tròn */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: antiquewhite;
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+button {
+  height: 50px;
+  width: 50px;
+}
+
+mat-form-field {
+  margin-top: 10px;
+}

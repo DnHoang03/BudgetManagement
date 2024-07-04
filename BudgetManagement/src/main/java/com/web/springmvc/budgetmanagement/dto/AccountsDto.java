@@ -19,4 +19,7 @@ public class AccountsDto {
     private Long accountTypeId;
     private Long currencyId;
     private Long iconId;
+    private String iconName;
+    private String accountTypeName;
+    private String currencyName;
 }

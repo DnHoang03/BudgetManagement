@@ -1,0 +1,25 @@
+<div class="container">
+    <h5>Quản lý tài khoản</h5>
+    <table>
+        <tr *ngFor="let account of accounts; let i = index">
+            <td>
+                <i  class="far fa-trash-alt delete-icon" (click)="deleteAccount(account.id??0)"></i>
+            </td>
+            <td>
+                <i  [class]="account.iconName + ' icon'"></i>
+            </td>
+            <td>
+                <div class="custom-data">
+                    <span >{{account.name}}</span>
+                    <span class="custom-note">{{account.note}}</span>
+                </div>
+            </td>
+            <td>
+               <i class="fas fa-pen" routerLink="{{account.id}}" style="cursor: pointer;"></i> 
+            </td>
+            <td>
+                <i class="fas fa-list"></i>
+            </td>
+        </tr>
+    </table>
+</div>

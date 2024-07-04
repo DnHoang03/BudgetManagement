@@ -1,70 +1,93 @@
 package com.web.springmvc.budgetmanagement.service;
 
 import com.web.springmvc.budgetmanagement.dto.AccountsDto;
-import com.web.springmvc.budgetmanagement.model.AccountTypes;
-import com.web.springmvc.budgetmanagement.model.Accounts;
+import com.web.springmvc.budgetmanagement.dto.AccountReportResponse;
+import com.web.springmvc.budgetmanagement.model.Account;
 import com.web.springmvc.budgetmanagement.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.swing.*;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class AccountsService {
-    private final AccountsRepository accountsRepository;
-    private final UsersRepository usersRepository;
-    private final AccountTypesRepository accountTypesRepository;
-    private final IconsRepository iconsRepository;
-    private final CurrenciesRepository currenciesRepository;
+    private final AccountRepository accountRepository;
+    private final UserRepository userRepository;
+    private final AccountTypeRepository accountTypeRepository;
+    private final IconRepository iconRepository;
+    private final CurrencyRepository currencyRepository;
 
     public AccountsDto createAccount(AccountsDto accountsDto) {
-        return mapToDto(accountsRepository.save(mapToEntity(accountsDto)));
+        return mapToDto(accountRepository.save(mapToEntity(accountsDto)));
     }
 
     public List<AccountsDto> getAllAccountsByUserId(Long id) {
-        return accountsRepository.findByUserId(id).stream().map(this::mapToDto).toList();
+        return accountRepository.findByUserId(id).stream().map(this::mapToDto).toList();
+    }
+
+    public AccountsDto getAccountById(Long id) {
+        return mapToDto(accountRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found account")));
+    }
+
+    public AccountReportResponse getResponseAccountByUserId(Long id) {
+        List<Account> accounts = accountRepository.findByUserId(id);
+        long debt = 0, asset = 0, total = 0;
+        for (Account account : accounts) {
+            if (account.getAccountType().getName().equals("Tôi nợ/ Tài khoản phải trả") || account.getAccountType().getName().equals("Thẻ tín dụng")) {
+                debt += account.getAmount();
+                total -= account.getAmount();
+            } else {
+                total += account.getAmount();
+                if (!account.getAccountType().getName().equals("Thẻ ghi nợ")) {
+                    asset += account.getAmount();
+                }
+            }
+        }
+        return new AccountReportResponse(asset, debt, total, accounts.stream().map(this::mapToDto).toList());
     }
 
     public AccountsDto updateAccount(AccountsDto accountsDto, Long id) {
-        Accounts accounts = accountsRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found account"));
-        accounts.setAmount(accountsDto.getAmount());
-        accounts.setName(accountsDto.getName());
-        accounts.setIcon(iconsRepository.findById(accountsDto.getIconId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found icon")));
-        accounts.setNote(accountsDto.getNote());
-        accounts.setCurrency(currenciesRepository.findById(accountsDto.getCurrencyId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found currency")));
-        accounts.setAccountType(accountTypesRepository.findById(accountsDto.getAccountTypeId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found accounttype")));
-        return mapToDto(accountsRepository.save(mapToEntity(accountsDto)));
+        Account account = accountRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found account"));
+        account.setAmount(accountsDto.getAmount());
+        account.setName(accountsDto.getName());
+        account.setIcon(iconRepository.findById(accountsDto.getIconId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found icon")));
+        account.setNote(accountsDto.getNote());
+        account.setCurrency(currencyRepository.findById(accountsDto.getCurrencyId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found currency")));
+        account.setAccountType(accountTypeRepository.findById(accountsDto.getAccountTypeId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found accounttype")));
+        return mapToDto(accountRepository.save(mapToEntity(accountsDto)));
     }
 
     public void deleteAccount(Long id) {
-        accountsRepository.deleteById(id);
+        accountRepository.deleteById(id);
     }
 
-    private AccountsDto mapToDto(Accounts accounts) {
-        return new AccountsDto(accounts.getId(),
-                accounts.getName(),
-                accounts.getAmount(),
-                accounts.getNote(),
-                accounts.getUser().getId(),
-                accounts.getAccountType().getId(),
-                accounts.getCurrency().getId(),
-                accounts.getIcon().getId());
+    private AccountsDto mapToDto(Account account) {
+        return new AccountsDto(account.getId(),
+                account.getName(),
+                account.getAmount(),
+                account.getNote(),
+                account.getUser().getId(),
+                account.getAccountType().getId(),
+                account.getCurrency().getId(),
+                account.getIcon().getId(),
+                account.getIcon().getUrl(),
+                account.getAccountType().getName(),
+                account.getCurrency().getUnit()+' '+ account.getCurrency().getName());
     }
 
-    private Accounts mapToEntity(AccountsDto accountsDto) {
-        Accounts accounts = new Accounts();
-        accounts.setId(accountsDto.getId());
-        accounts.setName(accountsDto.getName());
-        accounts.setAmount(accountsDto.getAmount());
-        accounts.setNote(accountsDto.getNote());
-        accounts.setUser(usersRepository.findById(accountsDto.getUserId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found user")));
-        accounts.setAccountType(accountTypesRepository.findById(accountsDto.getAccountTypeId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found account type")));
-        accounts.setCurrency(currenciesRepository.findById(accountsDto.getCurrencyId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found currency")));
-        accounts.setIcon(iconsRepository.findById(accountsDto.getIconId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found icon")));
-        return accounts;
+    private Account mapToEntity(AccountsDto accountsDto) {
+        Account account = new Account();
+        account.setId(accountsDto.getId());
+        account.setName(accountsDto.getName());
+        account.setAmount(accountsDto.getAmount());
+        account.setNote(accountsDto.getNote());
+        account.setUser(userRepository.findById(accountsDto.getUserId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found user")));
+        account.setAccountType(accountTypeRepository.findById(accountsDto.getAccountTypeId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found account type")));
+        account.setCurrency(currencyRepository.findById(accountsDto.getCurrencyId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found currency")));
+        account.setIcon(iconRepository.findById(accountsDto.getIconId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found icon")));
+        return account;
     }
 }

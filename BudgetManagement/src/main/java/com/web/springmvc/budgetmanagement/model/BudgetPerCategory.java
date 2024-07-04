@@ -15,7 +15,7 @@ public class BudgetPerCategory {
     private Long id;
     private Long amount;
     @ManyToOne(fetch = FetchType.LAZY)
-    private Users user;
+    private User user;
     @ManyToOne(fetch = FetchType.LAZY)
-    private IconNotes iconNotes;
+    private IconNote iconNote;
 }

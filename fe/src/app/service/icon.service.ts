@@ -11,11 +11,15 @@ export class IconService {
   constructor(private httpClient:HttpClient) { }
 
   getAllAccountIcon(): Observable<Icon[]> {
-    return this.httpClient.get<Icon[]>(this.apiUrl+"?type=INCOME");
+    return this.httpClient.get<Icon[]>(this.apiUrl+"?type=ACCOUNT");
   }
 
   getAllNoteIcon():Observable<Icon[]> {
-    return this.httpClient.get<Icon[]>(this.apiUrl+"?type=COST");
+    return this.httpClient.get<Icon[]>(this.apiUrl+"?type=SPENDING");
+  }
+
+  getIconById(id:number):Observable<Icon> {
+    return this.httpClient.get<Icon>(this.apiUrl+"/"+id.toString);
   }
 
 }

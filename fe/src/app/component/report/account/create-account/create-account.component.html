@@ -1,21 +1,51 @@
 <p>create-account works!</p>
-<form action="">
-    <mat-form-field class="example-full-width">
-        <mat-label>Favorite food</mat-label>
-        <input matInput placeholder="Ex. Pizza" value="Sushi">
+<div class="container">
+  <h3 class="custom-text">Thêm tài khoản</h3>
+  <form (ngSubmit)="createAccount()">
+    <mat-form-field>
+        <mat-label>Tên tài khoản </mat-label>
+        <input matInput placeholder="Vui lòng nhập tên tài khoản" name="accountName" [(ngModel)]="accountBind.name">
     </mat-form-field>
     <mat-form-field>
-        <mat-label>Cars</mat-label>
-        <select matNativeControl required>
-        <option value="Mặc định">Mặc định</option>
-        <option *ngFor="let account_type of accountTypes" [value]="account_type.name">{{account_type.name}}</option>
-        </select>
+        <mat-label>Kiểu</mat-label>
+        <mat-select matNativeControl [(value)]="accountBind.accountTypeName">
+        <mat-option *ngFor="let account_type of accountTypes; let i = index" [value]="account_type.name" (click)="setSelectedAccountType(account_type)">{{account_type.name}}</mat-option>
+        </mat-select>
       </mat-form-field>
-      <mat-form-field>
-        <mat-label>Cars</mat-label>
-        <select matNativeControl required>
-        <option value="Mặc định">Mặc định</option>
-        <option *ngFor="let currency of currencies" [value]="currency.name">{{currency.name}}</option>
-        </select>
-      </mat-form-field>
+    <mat-form-field>
+      <mat-label>Tiền tệ</mat-label>
+      <mat-select matNativeControl [(value)]="accountBind.currencyName">
+        <mat-option *ngFor="let currency of currencies; let i = index" [value]="currency.unit + ' ' + currency.name" (click)="setSelectedCurrency(currency)">{{ currency.unit + ' ' + currency.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Số tiền</mat-label>
+      <input matInput [value]="accountBind.amount" (click)="setSelectedInput()">
+      <!-- <app-input *ngIf="selectedInput" (ans)="bindVal($event)">
+
+      </app-input> -->
+    </mat-form-field>
+    <app-input *ngIf="selectedInput" (ans)="bindVal($event)">
+
+    </app-input>
+    <mat-form-field>
+      <mat-label>Biểu tượng</mat-label>
+      <input matInput [hidden]="true" >
+      <mat-grid-list cols="5" rowHeight="80px">
+        <mat-grid-tile *ngFor="let icon of icons" class="box-custom" > 
+          <div (click)="setSelectedIcon(icon)">
+            <i class="icon {{icon.url}}" [style]="(accountBind.iconId != icon.id)?'':'background-color:yellow;'"></i>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Ghi chú </mat-label>
+      <input matInput [(ngModel)]="accountBind.note" name="note">
+    </mat-form-field>
+    <div class="button-container">
+      <button class="fas fa-times" type="button"></button>
+      <button class="fas fa-check" type="submit"></button>
+    </div>
 </form>
+</div>

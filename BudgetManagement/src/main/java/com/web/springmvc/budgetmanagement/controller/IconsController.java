@@ -17,4 +17,9 @@ public class IconsController {
     public ResponseEntity<List<IconsDto>> getAllIcons(@RequestParam(value = "categoryId",required = false)Long id, @RequestParam(value = "type", required = false)String type) {
         return ResponseEntity.ok(iconsService.getIconsCondition(type, id));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<IconsDto> getIconById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(iconsService.getIconById(id));
+    }
 }

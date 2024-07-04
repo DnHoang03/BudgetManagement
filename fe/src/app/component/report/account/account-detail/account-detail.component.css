@@ -1,0 +1,69 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 850px;
+    height: 100%;
+    gap: 20px;
+    padding: 20px;
+    color: antiquewhite;
+  }
+.icon {
+    width: 50px; /* Điều chỉnh kích thước của icon */
+    height: 50px; /* Điều chỉnh kích thước của icon */
+    border: 2px solid #000; /* Điều chỉnh độ dày và màu sắc của viền */
+    border-radius: 20%; /* Làm viền của icon tròn */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(248, 244, 4);
+    color: #000;
+}
+.name-account {
+    justify-items: start;
+    color: antiquewhite;
+}
+.note {
+    font-size: 0.75em;
+    font-weight: 100;
+}
+.table-custom {
+    display: flex;
+    justify-content: end;
+}
+.amount {
+    font-size: 2em;
+    color: antiquewhite;
+    display: inline-flex;
+}
+
+.edit {
+    color: antiquewhite;
+}
+i:hover {
+    color: #afa2a2;
+}
+
+.date {
+    color: rgb(231, 222, 57);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.transactions {
+    color: antiquewhite;
+    margin-top: 15px;
+}
+
+.transactions-list {
+    border-bottom: 1px solid #ccc;
+}
+
+.transactions-amount {
+    color: antiquewhite;
+    margin-top: 15px;
+}
+
+.transactions-date {
+    color: antiquewhite;
+    size: 0.1em;
+    margin-top: 15px;
+}

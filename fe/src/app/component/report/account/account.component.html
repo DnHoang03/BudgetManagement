@@ -1,1 +1,55 @@
-<p>account works!</p>
+<div class="container">
+    <table class="custom-table">
+        <thead>
+            <th class="title">Giá trị ròng</th>
+            <th class="title">Tài sản</th>
+            <th class="title">Nợ phải trả</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{accountResponse.total}}
+                </td>
+                <td class="td-static">{{accountResponse.asset}}</td>
+                <td>{{accountResponse.debt}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <thead class="th-custom">
+            <th></th>
+            <th class="title" style="width: 20%;">Tên tài khoản</th>
+            <th class="title" style="width: 220px;">
+                <mat-select [(value)]="selectedTypeId" (valueChange)="setSelectedType()">
+                    @for (type of types;track type) {
+                    <mat-option [value]="type.id">{{type.name}}</mat-option>
+                    }
+                </mat-select>
+            </th>
+            <th class="title">Đơn vị tiền tệ</th>
+            <th class="title">Số tiền</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let account of accountResponse.accounts; let i = index" routerLink="./detail/{{account.id}}"
+                class="account-list">
+                @if (selectedTypeId == 0) {
+                <td><i [class]="account.iconName + ' icon'"></i></td>
+                <td>{{account.name}}</td>
+                <td style="justify-content: start;">{{account.accountTypeName}}</td>
+                <td>{{account.currencyName}}</td>
+                <td>{{account.amount}}</td>
+                }
+                @else if(selectedTypeId == account.accountTypeId) {
+                <td><i [class]="account.iconName + ' icon'"></i></td>
+                <td>{{account.name}}</td>
+                <td style="justify-content: start;">{{account.accountTypeName}}</td>
+                <td>{{account.currencyName}}</td>
+                <td>{{account.amount}}</td>
+                }
+            </tr>
+        </tbody>
+    </table>
+    <div style="display: grid; grid-template-columns: 1fr 1fr;">
+        <p routerLink="./create" >Thêm tài khoản</p>
+        <p routerLink="./manage" >Quản lý tài khoản</p>
+    </div>
+</div>

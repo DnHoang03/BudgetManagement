@@ -27,7 +27,7 @@ public class IconNotesController {
 
     @PostMapping()
     public ResponseEntity<IconNotesDto> createIconNote(@RequestBody IconNotesDto iconNotesDto) {
-        return new ResponseEntity<IconNotesDto>(iconNotesDto, HttpStatus.CREATED);
+        return new ResponseEntity<>(iconNotesService.createIconNote(iconNotesDto), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

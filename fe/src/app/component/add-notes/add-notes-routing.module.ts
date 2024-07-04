@@ -4,13 +4,13 @@ import { AddNotesComponent } from './add-notes.component';
 import { CostComponent } from './cost/cost.component';
 import { IncomeComponent } from './income/income.component';
 import { TransactionsComponent } from './transactions/transactions.component';
-import { InputComponent } from './input/input.component';
+import { AddIconComponent } from './setting-icon-note/add-icon/add-icon.component';
 
 const routes: Routes = [{ path: '', component: AddNotesComponent },
   {path:'cost', component: CostComponent},
   {path:'income', component: IncomeComponent},
   {path:'transactions', component: TransactionsComponent},
-  {path:'input', component:InputComponent}
+  {path:'setting/add-icon', component: AddIconComponent}
 ];
 
 @NgModule({

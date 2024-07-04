@@ -1,0 +1,41 @@
+<form class="container" (ngSubmit)="createIconNote()">
+    <p style="display: flex; justify-content: center; color: whitesmoke; font-size: larger;">Thêm danh mục</p>
+    <mat-form-field style="width: 80%;">
+        <i class="far fa-credit-card" style="font-size: larger; color: blanchedalmond;"></i>
+        <input matInput placeholder="Vui lòng nhập tên danh mục" name="name" [(ngModel)]="iconNote.name">
+    </mat-form-field>
+    <div style="display: flex; width: 80%;">
+        <mat-form-field style="width: 50%;">
+            <mat-label>Loại icon</mat-label>
+            <mat-select [(value)]="categoryId">
+                <mat-option *ngFor="let category of iconCategories" [value]="category.id">
+                    {{category.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field style="width: 50%; margin-left: 15px;">
+            <mat-label>Loại note</mat-label>
+            <mat-select [(value)]="iconNote.iconNoteType">
+                <mat-option value="COST">COST
+                </mat-option>
+                <mat-option value="INCOME">INCOME
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <mat-form-field style="width: 80%;">
+        <input matInput [hidden]="true">
+        <mat-label>Icon</mat-label>
+        <mat-grid-list cols="5">
+            @for (icon of icons; track $index) {
+            <mat-grid-tile *ngIf="icon.iconCategoryId == categoryId" (click)="setSelectedIcon(icon)">
+                <i class="icon {{icon.url}}" [style]="(iconNote.iconId != icon.id)?'':'background-color:yellow;'"></i>
+            </mat-grid-tile>
+            }
+        </mat-grid-list>
+    </mat-form-field>
+    <div style="display: flex;">
+        <button mat-raised-button>Tạo</button>
+        <a mat-raised-button href="https://www.google.com/" target="_blank">Hủy</a>
+    </div>
+</form>

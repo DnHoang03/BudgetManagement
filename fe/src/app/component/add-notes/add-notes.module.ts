@@ -6,18 +6,22 @@ import { AddNotesComponent } from './add-notes.component';
 import { CostComponent } from './cost/cost.component';
 import { IncomeComponent } from './income/income.component';
 import { TransactionsComponent } from './transactions/transactions.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormField, MatInputModule } from '@angular/material/input';
 import { MatSelect, MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule, provideNativeDateAdapter } from '@angular/material/core';
-import { InputComponent } from './input/input.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonToggle, MatButtonToggleGroup } from '@angular/material/button-toggle';
 import { NumberFormatPipe } from '../../share/pipes/number-format.pipe';
+import { ShareModule } from '../../share/share.module';
+import { SettingIconNoteComponent } from './setting-icon-note/setting-icon-note.component';
+import { AddIconComponent } from './setting-icon-note/add-icon/add-icon.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -26,8 +30,8 @@ import { NumberFormatPipe } from '../../share/pipes/number-format.pipe';
     CostComponent,
     IncomeComponent,
     TransactionsComponent,
-    InputComponent,
-    NumberFormatPipe
+    SettingIconNoteComponent,
+    AddIconComponent
   ],
   imports: [
     CommonModule,
@@ -40,9 +44,11 @@ import { NumberFormatPipe } from '../../share/pipes/number-format.pipe';
     MatNativeDateModule,
     MatGridListModule,
     MatIconModule,
-    MatButtonToggleGroup,
+    MatFormFieldModule,
     MatFormField,
-    MatButtonToggle
+    FormsModule,
+    ShareModule,
+    MatButtonModule
   ]
 })
 export class AddNotesModule { }

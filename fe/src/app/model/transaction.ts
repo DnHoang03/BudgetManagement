@@ -1,7 +1,13 @@
 export interface Transaction {
-    id:number,
+    id?:number,
+    name:string,
+    type:string,
     amount:number,
     createdAt:Date,
-    transferAccountId:number,
-    receiveAccountId:number
+    iconNoteId?:number,
+    iconNoteName?:string,
+    transferAccountId?:number,
+    receiveAccountId?:number,
+    transferAccountName?:string,
+    receiveAccountName?:string
 };

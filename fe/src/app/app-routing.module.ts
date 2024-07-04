@@ -7,7 +7,8 @@ const routes: Routes = [
   { path: 'profile', loadChildren: () => import('./component/profile/profile.module').then(m => m.ProfileModule) },
   { path: 'add-notes', loadChildren: () => import('./component/add-notes/add-notes.module').then(m => m.AddNotesModule) },
   { path: 'home', loadChildren: () => import('./component/home/home.module').then(m => m.HomeModule) },
-  { path: '', redirectTo: '/home', pathMatch: 'full' }
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'share', loadChildren: () => import('./share/share.module').then(m => m.ShareModule) }
 ];
 
 @NgModule({

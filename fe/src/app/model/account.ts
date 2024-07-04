@@ -6,5 +6,8 @@ export interface Account {
     userId:number,
     accountTypeId:number,
     currencyId:number,
-    iconId:number
+    iconId:number,
+    iconName?:string,
+    accountTypeName?:string,
+    currencyName?:string
 }
