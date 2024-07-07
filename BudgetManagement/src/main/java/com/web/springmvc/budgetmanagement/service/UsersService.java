@@ -1,6 +1,7 @@
 package com.web.springmvc.budgetmanagement.service;
 
 import com.web.springmvc.budgetmanagement.dto.UsersDto;
+import com.web.springmvc.budgetmanagement.exception.ResourceNotFoundException;
 import com.web.springmvc.budgetmanagement.model.User;
 import com.web.springmvc.budgetmanagement.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,7 @@ public class UsersService {
     private final UserRepository userRepository;
     
     public UsersDto getUserById(Long id) {
-        return mapToDto(userRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found user")));
+        return mapToDto(userRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Not found user")));
     }
 
     private UsersDto mapToDto(User user) {

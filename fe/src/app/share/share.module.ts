@@ -6,12 +6,19 @@ import { InputComponent } from './component/input/input.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NumberFormatPipe } from './pipes/number-format.pipe';
+import { DeleteComponent } from './dialog/delete/delete.component';
+import { MatDialogActions, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { SelectAccountComponent } from './dialog/select-account/select-account.component';
+import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
   declarations: [
     InputComponent,
-    NumberFormatPipe
+    NumberFormatPipe,
+    DeleteComponent,
+    SelectAccountComponent
   ],
   imports: [
     CommonModule,
@@ -19,10 +26,17 @@ import { NumberFormatPipe } from './pipes/number-format.pipe';
     MatFormFieldModule,
     MatInputModule,
     MatGridListModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatDialogContent,
+    MatDialogActions,
+    MatButtonModule,
+    MatDialogTitle,
+    MatListModule
   ],
   exports:[
-    InputComponent
+    InputComponent,
+    DeleteComponent,
+    SelectAccountComponent
   ]
 })
 export class ShareModule { }

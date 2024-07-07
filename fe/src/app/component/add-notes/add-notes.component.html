@@ -1,2 +1,32 @@
-<p>sada</p>
-<a routerLink="/add-notes/cost" >click here</a>
+<div class="container">
+    <div class="select-type-item">
+        <div [class]="(selectedType=='COST')?'selected-type-button':'select-type-button'"
+            (click)="setSelectedType('COST')">Chi phí</div>
+        <div [class]="(selectedType=='INCOME')?'selected-type-button':'select-type-button'"
+            (click)="setSelectedType('INCOME')">Thu nhập</div>
+        <div [class]="(selectedType=='TRANSFER')?'selected-type-button':'select-type-button'"
+            (click)="setSelectedType('TRANSFER')">Chuyển khoản</div>
+    </div>
+    <form style="width: 100%; display: flex; justify-content: center; align-items: center;">
+        <mat-form-field style="width: 80%; height: 100%;">
+            <input [hidden]="true" matInput>
+            @if (selectedType == 'COST' || selectedType == 'INCOME') {
+            <mat-grid-list cols="5" rowHeight="150px">
+                @for (iconNote of iconNotes; track $index) {
+                <mat-grid-tile *ngIf="iconNote.iconNoteType == selectedType" (click)="setSelectedIconNote(iconNote)">
+                    <div class="icon-with-caption">
+                        <i [class]="'icon ' + iconNote.iconName"
+                            [style]="(iconNote.id == selectedIconNote.id)?'background-color:yellow;color:black;':''"></i>
+                        <p class="caption">{{iconNote.name}}</p>
+                    </div>
+                </mat-grid-tile>
+                }
+            </mat-grid-list>
+            }
+            @else {
+
+            }
+        </mat-form-field>
+
+    </form>
+</div>

@@ -5,6 +5,7 @@ import { IconNote } from '../../../../model/iconNote';
 import { IconCategoryService } from '../../../../service/icon-category.service';
 import { IconCategory } from '../../../../model/iconCategory';
 import { IconNoteService } from '../../../../service/icon-note.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-icon',
@@ -19,11 +20,13 @@ export class AddIconComponent implements OnInit{
   iconNote:IconNote = {
     name:'',
     iconId:1,
-    iconNoteType:'COST'
+    iconNoteType:'COST',
+    iconName:''
   };
   constructor(private iconService:IconService
     , private iconCategoryService:IconCategoryService
-    , private iconNoteService:IconNoteService){}
+    , private iconNoteService:IconNoteService
+    , private router:Router){}
   ngOnInit(): void {
     this.iconService.getAllNoteIcon().subscribe(icons => {
       this.icons = icons;
@@ -41,5 +44,6 @@ export class AddIconComponent implements OnInit{
   createIconNote() {
     console.log(this.iconNote);
     this.iconNoteService.createIconNote(this.iconNote).subscribe();
+    this.router.navigate(['/add-notes/setting'])
   }
 }

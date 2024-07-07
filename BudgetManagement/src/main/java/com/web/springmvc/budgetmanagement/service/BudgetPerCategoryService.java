@@ -1,6 +1,7 @@
 package com.web.springmvc.budgetmanagement.service;
 
 import com.web.springmvc.budgetmanagement.dto.BudgetPerCategoryDto;
+import com.web.springmvc.budgetmanagement.exception.ResourceNotFoundException;
 import com.web.springmvc.budgetmanagement.model.BudgetPerCategory;
 import com.web.springmvc.budgetmanagement.repository.BudgetPerCategoryRepository;
 import com.web.springmvc.budgetmanagement.repository.IconNoteRepository;
@@ -27,8 +28,8 @@ public class BudgetPerCategoryService {
     private BudgetPerCategory mapToEntity(BudgetPerCategoryDto budgetPerCategory) {
         return new BudgetPerCategory(budgetPerCategory.getId(),
                 budgetPerCategory.getAmount(),
-                userRepository.findById(budgetPerCategory.getUserId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found user")),
-                iconNoteRepository.findById(budgetPerCategory.getIconNotesId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found icon")));
+                userRepository.findById(budgetPerCategory.getUserId()).orElseThrow(()->new ResourceNotFoundException("Not found user")),
+                iconNoteRepository.findById(budgetPerCategory.getIconNotesId()).orElseThrow(()->new ResourceNotFoundException("Not found icon")));
     }
     private BudgetPerCategoryDto mapToDto(BudgetPerCategory budgetPerCategory) {
         return new BudgetPerCategoryDto(budgetPerCategory.getId(),

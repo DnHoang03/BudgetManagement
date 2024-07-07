@@ -1,1 +1,36 @@
 <p>setting-icon-note works!</p>
+<div class="container">
+    <div class="select-type">
+        <div class="select-type-item">
+            <div [class]="(type=='COST')?'selected-type-button':'select-type-button'" (click)="setType('COST')">
+                Chi phí
+            </div>
+            <div [class]="(type=='INCOME')?'selected-type-button':'select-type-button'" (click)="setType('INCOME')">
+                Mua sắm
+            </div>
+        </div>
+    </div>
+    <table>
+        <tbody>
+            @for (iconNote of iconNotes; track $index) {
+            <tr *ngIf="iconNote.iconNoteType == type">
+                <td class="icon-trash">
+                    <i class="fas fa-trash" (click)="openDialog(iconNote.id!)"> </i>
+                </td>
+                <td class="icon-row">
+                    <div class="icon-contain">
+                        <i [class]="'icon '+ iconNote.iconName"></i>
+                    </div>
+                </td>
+                <td>
+                    {{iconNote.name}}
+                </td>
+                <td>
+                    <i class="fas fa-bars"></i>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    <button mat-raised-button routerLink="./add-icon">+ Thêm danh mục</button>
+</div>

@@ -1,6 +1,7 @@
 package com.web.springmvc.budgetmanagement.service;
 
 import com.web.springmvc.budgetmanagement.dto.TransactionsDto;
+import com.web.springmvc.budgetmanagement.exception.ResourceNotFoundException;
 import com.web.springmvc.budgetmanagement.model.TransactionType;
 import com.web.springmvc.budgetmanagement.model.Transaction;
 import com.web.springmvc.budgetmanagement.repository.AccountRepository;
@@ -61,12 +62,12 @@ public class TransactionsService {
     }
 
     public TransactionsDto updateTransaction(TransactionsDto transactionsDto, Long id) {
-        Transaction transaction = transactionRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found transaction"));
+        Transaction transaction = transactionRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Not found transaction"));
         transaction.setAmount(transactionsDto.getAmount());
         transaction.setName(transactionsDto.getName());
-        transaction.setIconNote((transactionsDto.getIconNoteId() != null)? iconNoteRepository.findById(transactionsDto.getIconNoteId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found note")):null);
-        transaction.setTransferAccount((transactionsDto.getTransferAccountId() != null) ? accountRepository.findById(transactionsDto.getTransferAccountId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found tranfer account")):null);
-        transaction.setReceiveAccount((transactionsDto.getReceiveAccountId() != null) ? accountRepository.findById(transactionsDto.getReceiveAccountId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found receive account")):null);
+        transaction.setIconNote((transactionsDto.getIconNoteId() != null)? iconNoteRepository.findById(transactionsDto.getIconNoteId()).orElseThrow(()->new ResourceNotFoundException("Not found note")):null);
+        transaction.setTransferAccount((transactionsDto.getTransferAccountId() != null) ? accountRepository.findById(transactionsDto.getTransferAccountId()).orElseThrow(()->new ResourceNotFoundException("Not found transfer account")):null);
+        transaction.setReceiveAccount((transactionsDto.getReceiveAccountId() != null) ? accountRepository.findById(transactionsDto.getReceiveAccountId()).orElseThrow(()->new ResourceNotFoundException("Not found receive account")):null);
         return mapToDto(transactionRepository.save(transaction));
     }
 
@@ -80,9 +81,9 @@ public class TransactionsService {
                 .name(transactionsDto.getName())
                 .transactionType(TransactionType.valueOf(transactionsDto.getType()))
                 .createdAt(transactionsDto.getCreatedAt())
-                .iconNote((transactionsDto.getIconNoteId() != null)? iconNoteRepository.findById(transactionsDto.getIconNoteId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found note")):null)
-                .transferAccount((transactionsDto.getTransferAccountId() != null) ? accountRepository.findById(transactionsDto.getTransferAccountId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found tranfer account")):null)
-                .receiveAccount((transactionsDto.getReceiveAccountId() != null) ? accountRepository.findById(transactionsDto.getReceiveAccountId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found receive account")):null)
+                .iconNote((transactionsDto.getIconNoteId() != null)? iconNoteRepository.findById(transactionsDto.getIconNoteId()).orElseThrow(()->new ResourceNotFoundException("Not found note")):null)
+                .transferAccount((transactionsDto.getTransferAccountId() != null) ? accountRepository.findById(transactionsDto.getTransferAccountId()).orElseThrow(()->new ResourceNotFoundException("Not found transfer account")):null)
+                .receiveAccount((transactionsDto.getReceiveAccountId() != null) ? accountRepository.findById(transactionsDto.getReceiveAccountId()).orElseThrow(()->new ResourceNotFoundException("Not found receive account")):null)
                 .build();
     }
 

@@ -1,0 +1,85 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 650px;
+    height: 100%;
+    gap: 20px;
+    padding: 20px;
+}
+
+.select-type-item {
+    width: 80%;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid white;
+    background-color: rgb(30, 26, 29);
+}
+
+.select-type-button {
+    display: inline-flex;
+    width: 33.33%;
+    height: 50px;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+}
+
+.select-type-button:hover {
+    background-color: rgb(64, 51, 51);
+}
+
+.selected-type-button {
+    display: inline-flex;
+    width: 33.33%;
+    height: 50px;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    background-color: white;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #000;
+    margin-top: 10px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: larger;
+    cursor: pointer;
+    background-color: rgb(107, 107, 106);
+    color: white;
+}
+
+.icon:hover {
+    background-color: rgb(101, 90, 90);
+}
+
+.icon-with-caption {
+    text-align: center;
+    /* Căn giữa các phần tử */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.icon-with-caption i {
+    font-size: 24px;
+    /* Kích thước của icon */
+    margin-bottom: 8px;
+    /* Khoảng cách giữa icon và chú thích */
+}
+
+.icon-with-caption .caption {
+    font-size: 14px;
+    /* Kích thước của chú thích */
+    color: white;
+    /* Màu chữ của chú thích */
+}

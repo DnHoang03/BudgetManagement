@@ -14,4 +14,12 @@ export class IconNoteService {
     console.log(this.apiUrl)
     return this.httpClient.post<IconNote>(this.apiUrl, iconNote);
   }
+
+  getAllIconNote():Observable<IconNote[]> {
+    return this.httpClient.get<IconNote[]>(this.apiUrl);
+  }
+
+  deleteIconNote(id:number):Observable<void> {
+    return this.httpClient.delete<void>(this.apiUrl+'/'+String(id));
+  }
 }

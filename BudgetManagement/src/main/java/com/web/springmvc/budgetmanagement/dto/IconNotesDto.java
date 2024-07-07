@@ -14,4 +14,5 @@ public class IconNotesDto {
     private String name;
     private Long iconId;
     private String iconNoteType;
+    private String iconName;
 }

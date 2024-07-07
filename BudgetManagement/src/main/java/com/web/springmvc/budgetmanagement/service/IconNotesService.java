@@ -1,6 +1,7 @@
 package com.web.springmvc.budgetmanagement.service;
 
 import com.web.springmvc.budgetmanagement.dto.IconNotesDto;
+import com.web.springmvc.budgetmanagement.exception.ResourceNotFoundException;
 import com.web.springmvc.budgetmanagement.model.IconNote;
 import com.web.springmvc.budgetmanagement.model.IconNoteType;
 import com.web.springmvc.budgetmanagement.repository.IconNoteRepository;
@@ -27,14 +28,14 @@ public class IconNotesService {
     }
 
     public IconNotesDto getIconNoteById(Long id) {
-        return mapToDto(iconNoteRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found iconnote")));
+        return mapToDto(iconNoteRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Not found user")));
     }
 
     public IconNotesDto updateIconNote(IconNotesDto iconNotesDto, Long id) {
-        IconNote iconNote = iconNoteRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found iconnote"));
+        IconNote iconNote = iconNoteRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Not found user"));
         iconNote.setName(iconNotesDto.getName());
         iconNote.setIconNoteType(IconNoteType.valueOf(iconNotesDto.getIconNoteType()));
-        iconNote.setIcon(iconRepository.findById(iconNotesDto.getIconId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found icon")));
+        iconNote.setIcon(iconRepository.findById(iconNotesDto.getIconId()).orElseThrow(()->new ResourceNotFoundException("Not found icon")));
         return mapToDto(iconNoteRepository.save(iconNote));
     }
 
@@ -49,6 +50,7 @@ public class IconNotesService {
                 .iconId(iconNote.getIcon().getId())
                 .iconNoteType(iconNote.getIconNoteType().name())
                 .name(iconNote.getName())
+                .iconName(iconNote.getIcon().getUrl())
                 .build();
     }
 
@@ -57,7 +59,7 @@ public class IconNotesService {
                 .id(iconNotesDto.getId())
                 .name(iconNotesDto.getName())
                 .iconNoteType(IconNoteType.valueOf(iconNotesDto.getIconNoteType()))
-                .icon(iconRepository.findById(iconNotesDto.getIconId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found icon")))
+                .icon(iconRepository.findById(iconNotesDto.getIconId()).orElseThrow(()->new ResourceNotFoundException("Not found icon")))
                 .build();
     }
 }

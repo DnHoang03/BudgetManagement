@@ -1,35 +1,12 @@
-.container {
-    width: 100%;
-    height: 100%;
-    gap: 20px;
-    padding: 20px;
-    color: rgb(241, 224, 186);
-}
 
 table {
-    width: 100%;
+    width: 400px;
     margin: 15px;
-    border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    background-color: rgb(78, 68, 75);
+    color:  rgb(233, 224, 228);
 }
-
-.custom-table {
-    background-color:rgb(78, 68, 75);
-}
-
 tbody {
     width: 100%;
-}
-
-.th-custom {
-    border-bottom: 1px solid #ccc;
-}
-
-.td-static {
-    width: 50%;
-    align-content: center;
-    align-items: center;
 }
 
 .account-list {
@@ -40,7 +17,6 @@ tbody {
 .account-list:hover {
     background-color: #454444;
 }
-
 .icon {
     width: 50px; /* Điều chỉnh kích thước của icon */
     height: 50px; /* Điều chỉnh kích thước của icon */
@@ -52,7 +28,6 @@ tbody {
     background-color: rgb(248, 244, 4);
     color: #000;
 }
-
 .icon-custom {
     width: 50px; /* Điều chỉnh kích thước của icon */
     height: 50px; /* Điều chỉnh kích thước của icon */
@@ -61,31 +36,23 @@ tbody {
     align-items: center;
     font-size: 50px;
 }
-
-.title {
-    color: #9b9b9b;
+p{
+    margin: 0 0 0;
+}
+.note {
+    font-size: 0.75em;
     font-weight: 100;
+    color: #989292;
 }
 
-th, td {
-    padding: 5px; /* Thiết lập khoảng cách bên trong các ô bảng */
-    text-align: left; /* Căn trái nội dung trong ô bảng */
+.currency {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 15px;
 }
 
-p {
-    display: flex; 
-    height: 50px;
-    justify-content: center; 
-    justify-items: center;
-    align-items: center; 
-    margin: 10px;
+.close {
     cursor: pointer;
-    border-top: 10px;
-    border-bottom: 10px; 
-    background-color: rgb(90, 81, 69); 
-    color: white;
-}
-
-p:hover {
-    background-color: rgb(73, 68, 61); 
+    color: red;
 }

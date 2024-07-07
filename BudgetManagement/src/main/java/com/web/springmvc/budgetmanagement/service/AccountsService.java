@@ -2,6 +2,7 @@ package com.web.springmvc.budgetmanagement.service;
 
 import com.web.springmvc.budgetmanagement.dto.AccountsDto;
 import com.web.springmvc.budgetmanagement.dto.AccountReportResponse;
+import com.web.springmvc.budgetmanagement.exception.ResourceNotFoundException;
 import com.web.springmvc.budgetmanagement.model.Account;
 import com.web.springmvc.budgetmanagement.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,7 @@ public class AccountsService {
     }
 
     public AccountsDto getAccountById(Long id) {
-        return mapToDto(accountRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found account")));
+        return mapToDto(accountRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Not found account")));
     }
 
     public AccountReportResponse getResponseAccountByUserId(Long id) {
@@ -50,13 +51,13 @@ public class AccountsService {
     }
 
     public AccountsDto updateAccount(AccountsDto accountsDto, Long id) {
-        Account account = accountRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found account"));
+        Account account = accountRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Not found account"));
         account.setAmount(accountsDto.getAmount());
         account.setName(accountsDto.getName());
-        account.setIcon(iconRepository.findById(accountsDto.getIconId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found icon")));
+        account.setIcon(iconRepository.findById(accountsDto.getIconId()).orElseThrow(()-> new ResourceNotFoundException("Not found account")));
         account.setNote(accountsDto.getNote());
-        account.setCurrency(currencyRepository.findById(accountsDto.getCurrencyId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found currency")));
-        account.setAccountType(accountTypeRepository.findById(accountsDto.getAccountTypeId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found accounttype")));
+        account.setCurrency(currencyRepository.findById(accountsDto.getCurrencyId()).orElseThrow(()-> new ResourceNotFoundException("Not found currency")));
+        account.setAccountType(accountTypeRepository.findById(accountsDto.getAccountTypeId()).orElseThrow(()-> new ResourceNotFoundException("Not found accountType")));
         return mapToDto(accountRepository.save(mapToEntity(accountsDto)));
     }
 
@@ -84,10 +85,10 @@ public class AccountsService {
         account.setName(accountsDto.getName());
         account.setAmount(accountsDto.getAmount());
         account.setNote(accountsDto.getNote());
-        account.setUser(userRepository.findById(accountsDto.getUserId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found user")));
-        account.setAccountType(accountTypeRepository.findById(accountsDto.getAccountTypeId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found account type")));
-        account.setCurrency(currencyRepository.findById(accountsDto.getCurrencyId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found currency")));
-        account.setIcon(iconRepository.findById(accountsDto.getIconId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found icon")));
+        account.setUser(userRepository.findById(accountsDto.getUserId()).orElseThrow(()->new ResourceNotFoundException("Not found user")));
+        account.setAccountType(accountTypeRepository.findById(accountsDto.getAccountTypeId()).orElseThrow(()->new ResourceNotFoundException("Not found accountType")));
+        account.setCurrency(currencyRepository.findById(accountsDto.getCurrencyId()).orElseThrow(()->new ResourceNotFoundException("Not found currency")));
+        account.setIcon(iconRepository.findById(accountsDto.getIconId()).orElseThrow(()->new ResourceNotFoundException("Not found icon")));
         return account;
     }
 }
