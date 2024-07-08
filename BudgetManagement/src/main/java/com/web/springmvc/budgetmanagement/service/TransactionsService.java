@@ -81,6 +81,7 @@ public class TransactionsService {
                 .name(transactionsDto.getName())
                 .transactionType(TransactionType.valueOf(transactionsDto.getType()))
                 .createdAt(transactionsDto.getCreatedAt())
+                .amount(transactionsDto.getAmount())
                 .iconNote((transactionsDto.getIconNoteId() != null)? iconNoteRepository.findById(transactionsDto.getIconNoteId()).orElseThrow(()->new ResourceNotFoundException("Not found note")):null)
                 .transferAccount((transactionsDto.getTransferAccountId() != null) ? accountRepository.findById(transactionsDto.getTransferAccountId()).orElseThrow(()->new ResourceNotFoundException("Not found transfer account")):null)
                 .receiveAccount((transactionsDto.getReceiveAccountId() != null) ? accountRepository.findById(transactionsDto.getReceiveAccountId()).orElseThrow(()->new ResourceNotFoundException("Not found receive account")):null)

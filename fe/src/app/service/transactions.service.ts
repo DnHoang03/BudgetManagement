@@ -26,6 +26,12 @@ export class TransactionsService {
   }
 
   createTransaction(transaction:Transaction):Observable<Transaction> {
+    console.log(transaction)
     return this.httpClient.post<Transaction>(this.apiUrl, transaction);
   }
-}
+
+  updateTransaction(transaction:Transaction):Observable<Transaction> {
+    console.log(transaction);
+    return this.httpClient.put<Transaction>(this.apiUrl+'/'+String(transaction.id), transaction);
+  }
+ }

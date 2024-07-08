@@ -5,6 +5,7 @@ import com.web.springmvc.budgetmanagement.service.CurrenciesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,5 +20,10 @@ public class CurrenciesController {
     @GetMapping
     public ResponseEntity<List<CurrenciesDto>> getAllCurrencies() {
         return ResponseEntity.ok(currenciesService.getAllCurrencies());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CurrenciesDto> getCurrencyById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(currenciesService.getCurrencyById(id));
     }
 }

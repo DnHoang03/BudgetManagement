@@ -59,7 +59,7 @@ export class CreateAccountComponent implements OnInit{
   
   createAccount():void {
     if(this.accountBind.id != undefined) {
-      this.accountService.updateAccount(this.accountBind, this.accountBind.id).subscribe(account => {
+      this.accountService.updateAccount(this.accountBind).subscribe(account => {
         console.log(account);
       });
     } else {

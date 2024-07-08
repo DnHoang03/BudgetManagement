@@ -4,11 +4,6 @@
       <input matInput
         [value]="(cal == '')?(current_value|numberFormat):((pre_value|numberFormat)+cal+(current_value|numberFormat))">
     </mat-form-field>
-    <!-- Input ghi chú -->
-    <mat-form-field appearance="fill" class="note-input">
-      <mat-label>Ghi chú</mat-label>
-      <input matInput placeholder="Nhập ghi chú">
-    </mat-form-field>
     <mat-grid-list cols="4" rowHeight="30px" gutterSize="5px" class="number-list">
       <mat-grid-tile *ngFor="let number of numbers" class="custom-clr" (click)="evt_handle(number)">
         <div [ngSwitch]="number">

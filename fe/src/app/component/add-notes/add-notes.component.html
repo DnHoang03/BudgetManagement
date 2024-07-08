@@ -1,4 +1,5 @@
 <div class="container">
+    <h6 style=" color: white; font-weight: 500;">Thêm</h6>
     <div class="select-type-item">
         <div [class]="(selectedType=='COST')?'selected-type-button':'select-type-button'"
             (click)="setSelectedType('COST')">Chi phí</div>
@@ -21,12 +22,49 @@
                     </div>
                 </mat-grid-tile>
                 }
+                <mat-grid-tile>
+                    <div class="icon-with-caption">
+                        <i class="icon fas fa-plus" routerLink="./setting"></i>
+                        <p class="caption">Cài đặt</p>
+                    </div>
+                </mat-grid-tile>
             </mat-grid-list>
             }
             @else {
-
+            <div class="account-transfer">
+                <div class="icon-with-caption icon-with-caption-account">
+                    @if (transferAccount.id != 0) {
+                    <i [class]="transferAccount.iconName + ' add-account-icon'" (click)="selectAccount(true)"></i>
+                    <p class="caption"> {{transferAccount.name}}</p>
+                    <p class="caption"> {{transferAccount.currencyName+' '+transferAccount.amount}}</p>
+                    }
+                    @else {
+                    <i class="fas fa-plus add-account-icon" (click)="selectAccount(true)"></i>
+                    <p class="caption">Lựa chọn</p>
+                    }
+                    @if (transferAccount.id != 0 && receiveAccount.id != 0) {
+                    <p class="caption">{{transferAccount.currencyName + ' ' + totalTransfer}}</p>
+                    }
+                </div>
+                <i class="fas fa-arrow-right" style="margin: auto; color: white;"></i>
+                <div class="icon-with-caption icon-with-caption-account">
+                    @if (receiveAccount.id != 0) {
+                    <i [class]="receiveAccount.iconName + ' add-account-icon'" (click)="selectAccount(true)"></i>
+                    <p class="caption"> {{receiveAccount.name}}</p>
+                    <p class="caption"> {{receiveAccount.currencyName+' '+receiveAccount.amount}}</p>
+                    }
+                    @else {
+                    <i class="fas fa-plus add-account-icon" (click)="selectAccount(false)"></i>
+                    <p class="caption">Lựa chọn</p>
+                    }
+                    @if (transferAccount.id != 0 && receiveAccount.id != 0) {
+                    <p class="caption">{{receiveAccount.currencyName + ' ' + totalReceive}}</p>
+                    }
+                </div>
+            </div>
             }
         </mat-form-field>
-
     </form>
+    <app-input *ngIf="(selectedType == 'TRANSFER' && transferAccount.id != 0 && receiveAccount.id != 0) " (ans)="bindVal($event)">
+    </app-input>
 </div>

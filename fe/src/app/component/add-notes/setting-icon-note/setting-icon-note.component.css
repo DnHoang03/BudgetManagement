@@ -10,7 +10,6 @@
 
 table {
     width: 100%;
-    height: 100%;
     background-color: rgb(78, 68, 75);
     color: white;
     padding: 10px;
@@ -54,7 +53,12 @@ table {
 
 tr {
     height: 50px;
+    max-height: 50px;
     border-bottom: 0.5px solid white;
+}
+
+td {
+    max-height: 50px;
 }
 
 .select-type {

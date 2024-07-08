@@ -23,8 +23,8 @@ export class AccountService {
     return this.httpClient.post<Account>(this.apiUrl, account);
   }
 
-  updateAccount(account:Account, id:number):Observable<Account> {
-    return this.httpClient.put<Account>(this.apiUrl+"/"+String(id), account);
+  updateAccount(account:Account):Observable<Account> {
+    return this.httpClient.put<Account>(this.apiUrl+"/"+String(account.id), account);
   }
 
   deleteAccount(id:number):Observable<void> {

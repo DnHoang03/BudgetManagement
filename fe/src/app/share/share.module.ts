@@ -11,6 +11,9 @@ import { MatDialogActions, MatDialogContent, MatDialogTitle } from '@angular/mat
 import { MatButtonModule } from '@angular/material/button';
 import { SelectAccountComponent } from './dialog/select-account/select-account.component';
 import { MatListModule } from '@angular/material/list';
+import { IconNoteInputComponent } from './dialog/icon-note-input/icon-note-input.component';
+import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -18,7 +21,8 @@ import { MatListModule } from '@angular/material/list';
     InputComponent,
     NumberFormatPipe,
     DeleteComponent,
-    SelectAccountComponent
+    SelectAccountComponent,
+    IconNoteInputComponent
   ],
   imports: [
     CommonModule,
@@ -31,12 +35,15 @@ import { MatListModule } from '@angular/material/list';
     MatDialogActions,
     MatButtonModule,
     MatDialogTitle,
-    MatListModule
+    MatListModule,
+    MatIconModule,
+    FormsModule
   ],
   exports:[
     InputComponent,
     DeleteComponent,
-    SelectAccountComponent
+    SelectAccountComponent,
+    IconNoteInputComponent
   ]
 })
 export class ShareModule { }

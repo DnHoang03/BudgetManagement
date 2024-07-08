@@ -1,1 +1,28 @@
-<p>home works!</p>
+<div class="container">
+    <h6>Sổ thu chi</h6>
+    <form>
+        <table>
+            <tr>
+                <td class="tr-fee">
+                    <p class="title">Chi phí</p>
+                </td>
+                <td class="tr-fee">
+                    <p class="title">Thu nhập</p>
+                </td>
+                <td class="date-picker">
+                    <p class="title"></p>
+                    <mat-form-field class="mat-form" style="width: 70%;">
+                        <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" [ngModelOptions]="{standalone: true}">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker" style="margin-right: 20px;">
+                            <!-- <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon> -->
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #picker startView="multi-year"
+                            (monthSelected)="chosenMonthHandler($event, picker)"
+                            panelClass="example-month-picker"></mat-datepicker>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+</div>

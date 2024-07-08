@@ -3,6 +3,7 @@ package com.web.springmvc.budgetmanagement.controller;
 import com.web.springmvc.budgetmanagement.dto.TransactionsDto;
 import com.web.springmvc.budgetmanagement.service.TransactionsService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +30,11 @@ public class TransactionsController {
 
     @PostMapping()
     public ResponseEntity<TransactionsDto> createTransaction(@RequestBody TransactionsDto transactionsDto) {
-        return ResponseEntity.ok(transactionsService.createTransaction(transactionsDto));
+        return new ResponseEntity<>(transactionsService.createTransaction(transactionsDto), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TransactionsDto> updateTransaction(@RequestBody TransactionsDto transactionsDto, @PathVariable("id") Long id) {
+        return ResponseEntity.ok(transactionsService.updateTransaction(transactionsDto, id));
     }
 }

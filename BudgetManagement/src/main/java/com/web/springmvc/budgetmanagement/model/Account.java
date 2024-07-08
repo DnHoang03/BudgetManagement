@@ -33,10 +33,10 @@ public class Account {
     @ManyToOne(fetch = FetchType.LAZY)
     private Icon icon;
 
-    @OneToMany(mappedBy = "transferAccount", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "transferAccount", cascade = CascadeType.ALL)
     private List<Transaction> transferTransactions = new ArrayList<>();
 
-    @OneToMany(mappedBy = "receiveAccount", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "receiveAccount", cascade = CascadeType.ALL)
     private List<Transaction> receiveTransactions = new ArrayList<>();
 
 }
