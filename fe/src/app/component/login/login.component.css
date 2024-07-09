@@ -1,0 +1,15 @@
+.container {
+    color: 
+    rgb(255, 171, 243);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 650px;
+    height: 100%;
+    padding-top: 20px;
+}
+
+mat-form-field {
+    width: 300px;
+}

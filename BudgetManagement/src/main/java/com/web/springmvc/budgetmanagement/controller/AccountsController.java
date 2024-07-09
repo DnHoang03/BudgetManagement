@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AccountsController {
     private final AccountsService accountsService;
-
     @GetMapping
     public ResponseEntity<AccountReportResponse> getAllAccounts() {
-        return ResponseEntity.ok(accountsService.getResponseAccountByUserId(1L));
+        return ResponseEntity.ok(accountsService.getResponseAccountByUsername());
     }
 
     @GetMapping("/{id}")

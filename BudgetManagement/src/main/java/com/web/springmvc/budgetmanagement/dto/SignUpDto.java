@@ -2,16 +2,14 @@ package com.web.springmvc.budgetmanagement.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
 @Builder
-public class UsersDto {
-    private Long id;
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+public class SignUpDto {
     private String username;
-    private String gender;
-    private long budget;
+    private String password;
 }

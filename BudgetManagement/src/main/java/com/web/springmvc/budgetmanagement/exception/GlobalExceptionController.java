@@ -1,5 +1,6 @@
 package com.web.springmvc.budgetmanagement.exception;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -42,6 +43,17 @@ public class GlobalExceptionController {
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setTimestamp(new Date());
         errorResponse.setStatus(HttpStatus.NOT_FOUND.value());
+        String message = e.getMessage();
+        errorResponse.setMessage(message);
+        return errorResponse;
+    }
+
+    @ExceptionHandler({AuthorizationException.class})
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ErrorResponse handleAuthorizationException(Exception e) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setTimestamp(new Date());
+        errorResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
         String message = e.getMessage();
         errorResponse.setMessage(message);
         return errorResponse;

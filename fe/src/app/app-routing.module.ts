@@ -8,7 +8,8 @@ const routes: Routes = [
   { path: 'add-notes', loadChildren: () => import('./component/add-notes/add-notes.module').then(m => m.AddNotesModule) },
   { path: 'home', loadChildren: () => import('./component/home/home.module').then(m => m.HomeModule) },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'share', loadChildren: () => import('./share/share.module').then(m => m.ShareModule) }
+  { path: 'share', loadChildren: () => import('./share/share.module').then(m => m.ShareModule) },
+  { path: 'login', loadChildren: () => import('./component/login/login.module').then(m => m.LoginModule) }
 ];
 
 @NgModule({

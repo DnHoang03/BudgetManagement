@@ -4,6 +4,7 @@ import com.web.springmvc.budgetmanagement.dto.AccountsDto;
 import com.web.springmvc.budgetmanagement.dto.AccountReportResponse;
 import com.web.springmvc.budgetmanagement.exception.ResourceNotFoundException;
 import com.web.springmvc.budgetmanagement.model.Account;
+import com.web.springmvc.budgetmanagement.model.User;
 import com.web.springmvc.budgetmanagement.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,7 @@ public class AccountsService {
     private final AccountTypeRepository accountTypeRepository;
     private final IconRepository iconRepository;
     private final CurrencyRepository currencyRepository;
-
+    private final UsersService usersService;
     public AccountsDto createAccount(AccountsDto accountsDto) {
         return mapToDto(accountRepository.save(mapToEntity(accountsDto)));
     }
@@ -90,5 +91,10 @@ public class AccountsService {
         account.setCurrency(currencyRepository.findById(accountsDto.getCurrencyId()).orElseThrow(()->new ResourceNotFoundException("Not found currency")));
         account.setIcon(iconRepository.findById(accountsDto.getIconId()).orElseThrow(()->new ResourceNotFoundException("Not found icon")));
         return account;
+    }
+
+    public AccountReportResponse getResponseAccountByUsername() {
+        User user = userRepository.findByUsername(usersService.getCurrentUsername()).orElseThrow(()->new ResourceNotFoundException("Not found user or user didn't login"));
+        return getResponseAccountByUserId(user.getId());
     }
 }
