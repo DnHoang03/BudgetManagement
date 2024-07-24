@@ -1,0 +1,76 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 15px;
+    margin-top: 15px;
+    color: white;
+}
+
+.statistic {
+    width: 100%;
+    border: 1px solid wheat;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.header {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+.title {
+    grid-column: 1/2;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.icon-arrow {
+    grid-column: 2/3;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 100%;
+}
+
+.date-picker {
+    grid-column: 1/2;
+    padding: 5px;
+    font-size: larger;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.statistic-cost {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-column: 2/4;
+    padding: 5px;
+}
+
+.statistic-income {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-column: 4/6;
+    padding: 5px;
+}
+
+.statistic-element-title {
+    color: rgb(111, 111, 111);
+    grid-row: 1/2;
+}
+
+.statistic-element-value {
+    grid-row: 2/3;
+}

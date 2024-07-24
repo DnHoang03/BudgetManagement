@@ -7,10 +7,10 @@
         </thead>
         <tbody>
             <tr>
-                <td>{{accountResponse.total}}
+                <td>{{accountResponse.total|numberFormat}}
                 </td>
-                <td class="td-static">{{accountResponse.asset}}</td>
-                <td>{{accountResponse.debt}}</td>
+                <td class="td-static">{{accountResponse.asset|numberFormat}}</td>
+                <td>{{accountResponse.debt|numberFormat}}</td>
             </tr>
         </tbody>
     </table>
@@ -36,14 +36,14 @@
                 <td>{{account.name}}</td>
                 <td style="justify-content: start;">{{account.accountTypeName}}</td>
                 <td>{{account.currencyName}}</td>
-                <td>{{account.amount}}</td>
+                <td>{{account.amount!|numberFormat}}</td>
                 }
                 @else if(selectedTypeId == account.accountTypeId) {
                 <td><i [class]="account.iconName + ' icon'"></i></td>
                 <td>{{account.name}}</td>
                 <td style="justify-content: start;">{{account.accountTypeName}}</td>
                 <td>{{account.currencyName}}</td>
-                <td>{{account.amount}}</td>
+                <td>{{account.amount!|numberFormat}}</td>
                 }
             </tr>
         </tbody>

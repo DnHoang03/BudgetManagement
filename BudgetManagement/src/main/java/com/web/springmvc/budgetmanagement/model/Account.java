@@ -1,15 +1,15 @@
 package com.web.springmvc.budgetmanagement.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Account {
@@ -39,4 +39,14 @@ public class Account {
     @OneToMany(mappedBy = "receiveAccount", cascade = CascadeType.ALL)
     private List<Transaction> receiveTransactions = new ArrayList<>();
 
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", amount=" + amount +
+                ", note='" + note + '\'' +
+                ", accountType=" + accountType +
+                '}';
+    }
 }

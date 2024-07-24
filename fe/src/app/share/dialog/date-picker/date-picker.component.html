@@ -1,0 +1,30 @@
+
+<div class="container" mat-dialog-content>
+    <div class="select-year">
+        <div>
+            {{'Năm '+selectedYear}}
+        </div>
+        <div class="down-year" (click)="downYear()">
+            <i class="fas fa-angle-left">
+
+            </i>
+        </div>
+        <div class="up-year" (click)="upYear()">
+            <i class="fas fa-angle-right">
+
+            </i>
+        </div>
+    </div>
+    <div class="select-month">
+        @for (item of months; track $index) {
+            <div class="select-month-item" (click)="selectMonth(item)" [style]="(item == selectedMonth)?'background-color:yellow; color: black':''">
+                {{'Thg ' + item}}
+            </div>
+        }
+    </div>
+    <div class="button-display">
+        <button mat-button (click)="close()">Hủy</button>
+        <button mat-button color="warn" (click)="selectDate()">Xác nhận</button>
+    </div>
+    
+</div>

@@ -1,0 +1,56 @@
+.container {
+    color: white;
+}
+
+.select-year {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.down-year {
+    grid-column: 3;
+}
+.up-year {
+    grid-column: 4;
+}
+
+.down-year,
+.up-year {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 100%;
+}
+
+.down-year:hover,
+.up-year:hover {
+    background-color: gray;
+}
+
+
+
+.select-month {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    row-gap: 20px;
+}
+
+.select-month-item {
+    text-align: center;
+    border-radius: 15px;
+    font-size: small;
+    width: 50px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.button-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+

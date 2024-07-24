@@ -6,6 +6,8 @@ import { IconCategoryService } from '../../../../service/icon-category.service';
 import { IconCategory } from '../../../../model/iconCategory';
 import { IconNoteService } from '../../../../service/icon-note.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../../service/auth.service';
+import { UserService } from '../../../../service/user.service';
 
 @Component({
   selector: 'app-add-icon',
@@ -26,13 +28,18 @@ export class AddIconComponent implements OnInit{
   constructor(private iconService:IconService
     , private iconCategoryService:IconCategoryService
     , private iconNoteService:IconNoteService
-    , private router:Router){}
+    , private router:Router
+    , private authService:AuthService
+    , private userService:UserService){}
   ngOnInit(): void {
     this.iconService.getAllNoteIcon().subscribe(icons => {
       this.icons = icons;
     })
     this.iconCategoryService.getAllIconCategory().subscribe(categories => {
       this.iconCategories = categories;
+    })
+    this.userService.getUserByUsername(this.authService.getUsername()).subscribe(user => {
+      this.iconNote.userId = user.id;
     })
   }
 

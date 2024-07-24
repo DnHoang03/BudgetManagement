@@ -1,28 +1,65 @@
 <div class="container">
     <h6>Sổ thu chi</h6>
-    <form>
-        <table>
-            <tr>
-                <td class="tr-fee">
-                    <p class="title">Chi phí</p>
-                </td>
-                <td class="tr-fee">
-                    <p class="title">Thu nhập</p>
-                </td>
-                <td class="date-picker">
-                    <p class="title"></p>
-                    <mat-form-field class="mat-form" style="width: 70%;">
-                        <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" [ngModelOptions]="{standalone: true}">
-                        <mat-datepicker-toggle matIconSuffix [for]="picker" style="margin-right: 20px;">
-                            <!-- <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon> -->
-                        </mat-datepicker-toggle>
-                        <mat-datepicker #picker startView="multi-year"
-                            (monthSelected)="chosenMonthHandler($event, picker)"
-                            panelClass="example-month-picker"></mat-datepicker>
-                    </mat-form-field>
-                </td>
-            </tr>
-        </table>
-    </form>
+    <div class="statistic">
+        <div class="content">
+            <div class="date-picker" (click)="openDialog()">
+                <div class="statistic-element-title">
+                    {{getYear(date)}}
+                </div>
+                <div class="statistic-element-value" style="font-size: larger;">
+                    {{'Thg ' + getMonth(date)}}
+                    <i class="fas fa-angle-down">
 
+                    </i>
+                </div>
+            </div>
+            <div class="statistic-cost">
+                <div class="statistic-element-title">Chi phí</div>
+                <div class="statistic-element-value">{{statisticResponse.cost!|numberFormat}}</div>
+            </div>
+            <div class="statistic-income">
+                <div class="statistic-element-title">Thu nhập</div>
+                <div class="statistic-element-value">{{statisticResponse.income!|numberFormat}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="transaction-list">
+        @for (transactionList of transactionLists; track $index) {
+        <div class="transaction-list-date-row">
+            <p>{{getDate(transactionList.date!) + ' thg ' + getMonth(transactionList.date!)}}</p>
+            <p>{{getDay(transactionList.date!)}}</p>
+            <p style="grid-column: 3/8; text-align: end;">
+                {{'Chi phí: ' + (transactionList.cost!|numberFormat) + '&nbsp;&nbsp; Thu nhập: ' +
+                (transactionList.income!|numberFormat)}}
+            </p>
+        </div>
+        @for (transaction of transactionList.transactions; track $index) {
+        <div class="transaction-list-row" [routerLink]="'transaction/' + transaction.id">
+            <div class="transaction-icon">
+                <i [class]="((transaction.type=='TRANSFER')?'fas fa-exchange-alt':transaction.iconName) + ' icon'"></i>
+            </div>
+            @if (transaction.type == 'TRANSFER') {
+            <div class="transaction-name">
+                {{transaction.transferAccountName}} 
+                <i class="fas fa-arrow-right" style="margin-left: 5px; margin-right: 5px;"></i>
+                {{transaction.receiveAccountName}}
+            </div>
+            <div class="transaction-amount">
+                {{transaction.amount}}
+                <i class="fas fa-arrow-right" style="margin-left: 5px; margin-right: 5px;"></i>
+                {{transaction.receiveAmount}}
+            </div>
+            }
+            @else {
+            <div class="transaction-name">
+                {{transaction.iconNoteName}}
+            </div>
+            <div class="transaction-amount">
+                {{transaction.amount}}
+            </div>
+            }
+        </div>
+        }
+        }
+    </div>
 </div>

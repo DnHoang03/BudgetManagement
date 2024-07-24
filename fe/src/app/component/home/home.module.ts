@@ -8,11 +8,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
+import { ShareModule } from '../../share/share.module';
+import { DetailComponent } from './detail/detail.component';
 
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    DetailComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +24,8 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     MatDatepickerModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    ShareModule
   ]
 })
 export class HomeModule { }

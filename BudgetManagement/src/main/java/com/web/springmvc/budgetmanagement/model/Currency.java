@@ -1,15 +1,15 @@
 package com.web.springmvc.budgetmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Currency {
@@ -19,5 +19,15 @@ public class Currency {
     private String name;
     private String unit;
     @OneToMany(mappedBy = "currency", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
     private List<Account> accounts = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Currency{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", unit='" + unit + '\'' +
+                '}';
+    }
 }

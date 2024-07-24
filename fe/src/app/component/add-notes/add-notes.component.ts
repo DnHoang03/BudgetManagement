@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { TransactionsService } from '../../service/transactions.service';
 import { IconNoteInputComponent } from '../../share/dialog/icon-note-input/icon-note-input.component';
 import { Transaction } from '../../model/transaction';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-add-notes',
@@ -35,10 +36,11 @@ export class AddNotesComponent implements OnInit {
     , private errorPopupService: ErrorPopupService
     , private router: Router
     , private transactionService: TransactionsService
+    , private authService:AuthService
   ) { }
 
   ngOnInit(): void {
-    this.iconNoteService.getAllIconNote().subscribe(iconNotes => {
+    this.iconNoteService.getAllIconNoteByUsername(this.authService.getUsername()).subscribe(iconNotes => {
       this.iconNotes = iconNotes;
       console.log(iconNotes)
     })
@@ -60,17 +62,11 @@ export class AddNotesComponent implements OnInit {
         let amount = Number(result.amount)
         if(result.account !== undefined && result.account.id != 0) {
           transaction.transferAccountId = result.account.id;
-          let account = result.account;
-          if(this.selectedType == 'COST') {
-            (account.amount < amount)?(this.errorPopupService.showError('Không đủ tiền!')):(account.amount-=amount)
-          } else {
-            account.amount += amount;
-          }
-          this.accountService.updateAccount(account).subscribe()
         }
         transaction.amount = amount;
         transaction.name = (result.note=='')?iconNote.name:result.note;
         transaction.type = this.selectedType;
+        transaction.iconNoteId = iconNote.id;
         this.transactionService.createTransaction(transaction).subscribe()
       } 
     })
@@ -99,17 +95,12 @@ export class AddNotesComponent implements OnInit {
   }
 
   bindVal($event: any) {
-    this.totalReceive = Number($event);
-    this.totalTransfer = this.currencyService.calculateTotal(this.totalReceive, this.receiveAccount.currencyName!, this.transferAccount.currencyName!);
-    console.log(this.totalReceive, this.totalTransfer)
+    this.totalTransfer = Number($event);
+    console.log(this.totalTransfer)
     if (this.totalTransfer > this.transferAccount.amount!) {
       this.errorPopupService.showError("Không đủ số tiền")
       this.totalReceive = this.totalTransfer = 0;
     } else {
-      this.transferAccount.amount! -= this.totalTransfer;
-      this.receiveAccount.amount! += this.totalReceive;
-      this.accountService.updateAccount(this.transferAccount).subscribe()
-      this.accountService.updateAccount(this.receiveAccount).subscribe()
       this.transactionService.createTransaction({
         type: 'TRANSFER',
         amount: this.totalTransfer,

@@ -7,13 +7,16 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NumberFormatPipe } from './pipes/number-format.pipe';
 import { DeleteComponent } from './dialog/delete/delete.component';
-import { MatDialogActions, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
+import { MatDialogActions, MatDialogContent, MatDialogModule, MatDialogTitle } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { SelectAccountComponent } from './dialog/select-account/select-account.component';
 import { MatListModule } from '@angular/material/list';
 import { IconNoteInputComponent } from './dialog/icon-note-input/icon-note-input.component';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
+import { CurrencyPipe } from './pipes/currency.pipe';
+import { DatePickerComponent } from './dialog/date-picker/date-picker.component';
+import { DatePipe } from './pipes/date.pipe';
 
 
 @NgModule({
@@ -22,7 +25,10 @@ import { FormsModule } from '@angular/forms';
     NumberFormatPipe,
     DeleteComponent,
     SelectAccountComponent,
-    IconNoteInputComponent
+    IconNoteInputComponent,
+    CurrencyPipe,
+    DatePickerComponent,
+    DatePipe
   ],
   imports: [
     CommonModule,
@@ -31,10 +37,8 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     MatGridListModule,
     MatDatepickerModule,
-    MatDialogContent,
-    MatDialogActions,
     MatButtonModule,
-    MatDialogTitle,
+    MatDialogModule,
     MatListModule,
     MatIconModule,
     FormsModule
@@ -43,7 +47,11 @@ import { FormsModule } from '@angular/forms';
     InputComponent,
     DeleteComponent,
     SelectAccountComponent,
-    IconNoteInputComponent
+    IconNoteInputComponent,
+    NumberFormatPipe,
+    CurrencyPipe,
+    DatePickerComponent,
+    DatePipe
   ]
 })
 export class ShareModule { }

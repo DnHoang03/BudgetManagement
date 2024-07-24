@@ -1,12 +1,12 @@
 package com.web.springmvc.budgetmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class BudgetPerCategory {
@@ -15,7 +15,17 @@ public class BudgetPerCategory {
     private Long id;
     private Long amount;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     private User user;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     private IconNote iconNote;
+
+    @Override
+    public String toString() {
+        return "BudgetPerCategory{" +
+                "id=" + id +
+                ", amount=" + amount +
+                '}';
+    }
 }

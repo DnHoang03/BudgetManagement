@@ -5,7 +5,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class NumberFormatPipe implements PipeTransform {
 
-  transform(value: string): string {
+  transform(value: string|number): string {
+    if(value == undefined) return '';
+    if(typeof(value) == 'number') value = String(value)
     let st = value.replace('.', ',');
     let pos = st.indexOf(','), cnt = 0, emp = '';
     if(pos == -1) pos = st.length;

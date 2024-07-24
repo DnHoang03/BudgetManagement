@@ -1,10 +1,8 @@
 package com.web.springmvc.budgetmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +10,8 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Builder
 public class IconCategory {
     @Id
@@ -21,5 +20,14 @@ public class IconCategory {
     private String name;
 
     @OneToMany(mappedBy = "iconCategory", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Icon> icons = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "IconCategory{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

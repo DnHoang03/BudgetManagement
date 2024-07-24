@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AccountService } from '../../../service/account.service';
 import { ResponseNumber } from '../../../model/responseNumber';
 import { Account } from '../../../model/account';
@@ -24,6 +24,7 @@ export class IconNoteInputComponent {
     , private accountService:AccountService
     , private dialog:MatDialog
     , private errorPopupService: ErrorPopupService
+    , @Inject(MAT_DIALOG_DATA) public data: any
   ){}
 
   evt_handle(num:(number|string)) {

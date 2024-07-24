@@ -19,7 +19,7 @@ import java.util.function.Function;
 @Service
 public class JwtService {
     @Value("${app.jwt-secret}")
-    private String Sercret_Key;
+    private String Secret_Key;
 
     private Claims extractAllClaims(String token) {
         try
@@ -41,7 +41,7 @@ public class JwtService {
     }
 
     private Key getSigningKey() {
-        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(Sercret_Key));
+        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(Secret_Key));
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
@@ -58,7 +58,7 @@ public class JwtService {
                 .builder()
                 .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis()+1000*60*5))
+                .setExpiration(new Date(System.currentTimeMillis()+1000*60*60*24))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

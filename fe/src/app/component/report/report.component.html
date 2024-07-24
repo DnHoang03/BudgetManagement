@@ -1,10 +1,12 @@
-<p>report works!</p>
 <div class="container">
-    <h1>Báo cáo</h1>
-    <table>
-        <tr>
-            <td><a routerLink="/analyse"></a></td>
-            <td><a routerLink="/account"></a></td>
-        </tr>
-    </table>
+    <div class="nav">
+        <a class="nav-child" (click)="setState()" [style]="(state == 1)?'background-color: white; color: black;':''"
+         routerLink="./analyse">Phân
+            tích</a>
+        <a class="nav-child" (click)="setState()" [style]="(state == 0)?'background-color: white; color: black;':''" routerLink="./account">Tài
+            khoản</a>
+    </div>
+</div>
+<div class="content">
+    <router-outlet></router-outlet>
 </div>

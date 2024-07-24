@@ -38,7 +38,8 @@ public class AccountsService {
         List<Account> accounts = accountRepository.findByUserId(id);
         long debt = 0, asset = 0, total = 0;
         for (Account account : accounts) {
-            if (account.getAccountType().getName().equals("Tôi nợ/ Tài khoản phải trả") || account.getAccountType().getName().equals("Thẻ tín dụng")) {
+            if (account.getAccountType().getName().equals("Tôi nợ/ Tài khoản phải trả")
+                    || account.getAccountType().getName().equals("Thẻ tín dụng")) {
                 debt += account.getAmount();
                 total -= account.getAmount();
             } else {
@@ -52,12 +53,15 @@ public class AccountsService {
     }
 
     public AccountsDto updateAccount(AccountsDto accountsDto, Long id) {
-        Account account = accountRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Not found account"));
+        Account account = accountRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("Not found account"));
         account.setAmount(accountsDto.getAmount());
         account.setName(accountsDto.getName());
-        account.setIcon(iconRepository.findById(accountsDto.getIconId()).orElseThrow(()-> new ResourceNotFoundException("Not found account")));
+        account.setIcon(iconRepository.findById(accountsDto.getIconId())
+                .orElseThrow(()-> new ResourceNotFoundException("Not found account")));
         account.setNote(accountsDto.getNote());
-        account.setCurrency(currencyRepository.findById(accountsDto.getCurrencyId()).orElseThrow(()-> new ResourceNotFoundException("Not found currency")));
+        account.setCurrency(currencyRepository.findById(accountsDto.getCurrencyId())
+                .orElseThrow(()-> new ResourceNotFoundException("Not found currency")));
         account.setAccountType(accountTypeRepository.findById(accountsDto.getAccountTypeId()).orElseThrow(()-> new ResourceNotFoundException("Not found accountType")));
         return mapToDto(accountRepository.save(mapToEntity(accountsDto)));
     }

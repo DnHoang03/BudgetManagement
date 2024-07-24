@@ -5,14 +5,17 @@ import { CreateAccountComponent } from './account/create-account/create-account.
 import { ManageAccountComponent } from './account/manage-account/manage-account.component';
 import { AccountDetailComponent } from './account/account-detail/account-detail.component';
 import { AccountComponent } from './account/account.component';
+import { AnalyseComponent } from './analyse/analyse.component';
 
 const routes: Routes = [
-  { path: '', component: ReportComponent },
-  { path: 'account/create', component:CreateAccountComponent},
-  { path: 'account/manage', component:ManageAccountComponent},
-  { path: 'account/manage/:id', component:CreateAccountComponent},
-  { path: 'account/detail/:id', component:AccountDetailComponent},
-  { path: 'account', component:AccountComponent}
+  { path: '', component: ReportComponent,
+    children:[{ path: 'account/create', component:CreateAccountComponent},
+      { path: 'account/manage', component:ManageAccountComponent},
+      { path: 'account/manage/:id', component:CreateAccountComponent},
+      { path: 'account/detail/:id', component:AccountDetailComponent},
+      { path: 'account', component:AccountComponent},
+      { path:'analyse', component:AnalyseComponent}]
+   }
 ];
 
 @NgModule({

@@ -9,12 +9,14 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { ErrorInterceptor } from './interceptor/error.interceptor';
+import { NavComponent } from './component/nav/nav.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    NavComponent,
   ],
   imports: [
     BrowserModule,

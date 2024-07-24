@@ -11,7 +11,7 @@ export class ErrorPopupService {
   showError(message: string, action: string = 'Đóng') {
     this.snackBar.open(message, action, {
       duration: 5000, 
-      verticalPosition: 'top',
+      verticalPosition: 'bottom',
       horizontalPosition: 'center'
     });
   }

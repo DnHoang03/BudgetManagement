@@ -16,8 +16,8 @@ public class IconNotesController {
     private final IconNotesService iconNotesService;
 
     @GetMapping
-    public ResponseEntity<List<IconNotesDto>> getAllIconNotes() {
-        return ResponseEntity.ok(iconNotesService.getAllIconNotes());
+    public ResponseEntity<List<IconNotesDto>> getAllIconNotesByUsername(@RequestParam(value = "username", required = true) String username) {
+        return ResponseEntity.ok(iconNotesService.getAllIconNotesByUsername(username));
     }
 
     @GetMapping("/{id}")
@@ -31,13 +31,17 @@ public class IconNotesController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<IconNotesDto> updateIconNote(@RequestBody IconNotesDto iconNotesDto, @PathVariable("id") Long id) {
+    public ResponseEntity<IconNotesDto> updateIconNote(
+            @RequestBody IconNotesDto iconNotesDto,
+            @PathVariable("id") Long id) {
         return ResponseEntity.ok(iconNotesService.updateIconNote(iconNotesDto, id));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteIconNote(@PathVariable("id") Long id) {
         iconNotesService.deleteIconNote(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity
+                .noContent()
+                .build();
     }
 }

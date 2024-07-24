@@ -1,0 +1,78 @@
+<div *ngIf="transaction != undefined" class="container">
+    <h6 style="text-align: center;">
+        Chi tiết
+    </h6>
+    <div>
+        @if (transaction.iconName != undefined) {
+        <i [class]="transaction.iconName + ' icon'">
+        </i>
+        }
+        @else {
+        <i class="fas fa-exchange-alt icon"></i>
+        }
+    </div>
+    <div class="type">
+        <div class="header">
+            Kiểu
+        </div>
+        <div class="footer">
+            {{transaction.type}}
+        </div>
+    </div>
+    <div *ngIf="transaction.transferAccountId != undefined" class="account">
+        <div class="header">
+            Tài khoản
+        </div>
+        <div class="footer">
+            @if (transaction.receiveAccountId != undefined) {
+            {{transaction.transferAccountName + ' '}}
+            <i class="fas fa-arrow-right"></i>
+            {{' ' + transaction.receiveAccountName}}
+            }
+            @else {
+            {{transaction.transferAccountName}}
+            }
+        </div>
+    </div>
+    <div class="amount">
+        <div class="header">
+            Số tiền
+        </div>
+        <div class="footer">
+            @if (transaction.receiveAccountId != undefined) {
+            {{transaction.amount + ' '}}
+            <i class="fas fa-arrow-right"></i>
+            {{' ' + transaction.receiveAmount}}
+            }
+            @else {
+                {{transaction.amount}}
+            }
+        </div>
+    </div>
+    <div class="date">
+        <div class="header">
+            Ngày
+        </div>
+        <div class="footer">
+            {{(transaction.createdAt!|date)}}
+        </div>
+    </div>
+    <div class="note">
+        <div class="header">
+            Ghi chú
+        </div>
+        <div *ngIf="transaction.name != null" class="footer">
+            {{transaction.name}}
+        </div>
+    </div>
+    <div class="image">
+        <div class="header">
+            Ảnh
+        </div>
+    </div>
+    <div class="btn-control" (click)="deleteTransaction()">
+        <div class="button">
+            Xóa
+        </div>
+    </div>
+</div>

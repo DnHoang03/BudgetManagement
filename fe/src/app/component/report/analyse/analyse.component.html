@@ -1,1 +1,32 @@
-<p>analyse works!</p>
+<div class="container">
+    <div class="statistic">
+        <div class="header">
+            <div class="title">
+                Thống kê hàng tháng
+            </div>
+            <i class="fas fa-angle-right icon-arrow"></i>
+        </div>
+        <div class="content">
+            <div class="date-picker">
+                {{'Thg ' + (date.getMonth()+1)}}
+            </div>
+            <div class="statistic-cost">
+                <div class="statistic-element-title">
+                    Chi phí
+                </div>
+                <div class="statistic-element-value">
+                    {{(statisticResponse.cost!|numberFormat)}}
+                </div>
+            </div>
+            <div class="statistic-income">
+                <div class="statistic-element-title">
+                    Thu nhập
+                </div>
+                <div class="statistic-element-value">
+                    {{statisticResponse.income!|numberFormat}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

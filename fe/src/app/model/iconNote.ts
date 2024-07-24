@@ -3,5 +3,6 @@ export interface IconNote {
     name?:string,
     iconId?:number,
     iconNoteType?:string,
-    iconName?:string
+    iconName?:string,
+    userId?:number
 }

@@ -3,7 +3,7 @@
     <table>
         <tr *ngFor="let account of accounts; let i = index">
             <td>
-                <i  class="far fa-trash-alt delete-icon" (click)="deleteAccount(account.id??0)"></i>
+                <i  class="far fa-trash-alt delete-icon" (click)="openDialog(account.id??0)"></i>
             </td>
             <td>
                 <i  [class]="account.iconName + ' icon'"></i>

@@ -9,6 +9,8 @@ import { Account } from '../../../../model/account';
 import { AccountService } from '../../../../service/account.service';
 import { every } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from '../../../../service/user.service';
+import { AuthService } from '../../../../service/auth.service';
 
 @Component({
   selector: 'app-create-account',
@@ -34,7 +36,10 @@ export class CreateAccountComponent implements OnInit{
     private iconService:IconService,
     private currencyService:CurrencyService,
     private accountService:AccountService,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private userService:UserService,
+    private authService:AuthService,
+    private router:Router) {
       
     }
   ngOnInit(): void {
@@ -54,6 +59,10 @@ export class CreateAccountComponent implements OnInit{
         });
       }
     })
+    this.userService.getUserByUsername(this.authService.getUsername()).subscribe(user => {
+      console.log(user)
+      this.accountBind.userId = user.id;
+    })
     // this.accountBind = history.state;
   }
   
@@ -67,6 +76,7 @@ export class CreateAccountComponent implements OnInit{
         console.log(account);
       });
     }
+    this.router.navigate(['/report/account'])
   }
 
   setSelectedInput() {
@@ -91,5 +101,8 @@ export class CreateAccountComponent implements OnInit{
   bindVal($event:any) {
     this.accountBind.amount = Number($event);
     this.selectedInput = false;
+  }
+  return() {
+    this.router.navigate(['/report/account'])
   }
 }

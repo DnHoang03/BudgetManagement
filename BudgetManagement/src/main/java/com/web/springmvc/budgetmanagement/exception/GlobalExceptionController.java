@@ -3,6 +3,7 @@ package com.web.springmvc.budgetmanagement.exception;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -48,12 +49,23 @@ public class GlobalExceptionController {
         return errorResponse;
     }
 
-    @ExceptionHandler({AuthorizationException.class})
+    @ExceptionHandler({AuthorizationException.class, BadCredentialsException.class})
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ErrorResponse handleAuthorizationException(Exception e) {
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setTimestamp(new Date());
         errorResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
+        String message = e.getMessage();
+        errorResponse.setMessage(message);
+        return errorResponse;
+    }
+
+    @ExceptionHandler({TransactionErrorException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleTransactionErrorException(Exception e) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setTimestamp(new Date());
+        errorResponse.setStatus(HttpStatus.BAD_REQUEST.value());
         String message = e.getMessage();
         errorResponse.setMessage(message);
         return errorResponse;

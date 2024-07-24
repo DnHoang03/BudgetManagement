@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 public class TransactionsDto {
     private Long id;
     private long amount;
+    private long receiveAmount;
     private String name;
     private String type;
     private LocalDateTime createdAt;
@@ -20,4 +21,5 @@ public class TransactionsDto {
     private String iconNoteName;
     private String receiveAccountName;
     private String transferAccountName;
+    private String iconName;
 }

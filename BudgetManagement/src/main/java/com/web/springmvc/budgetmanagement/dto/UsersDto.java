@@ -14,4 +14,5 @@ public class UsersDto {
     private String username;
     private String gender;
     private long budget;
+    private String imageUrl;
 }

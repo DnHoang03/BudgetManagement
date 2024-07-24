@@ -1,15 +1,15 @@
 package com.web.springmvc.budgetmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class AccountType {
@@ -19,5 +19,14 @@ public class AccountType {
     private String name;
 
     @OneToMany(mappedBy = "accountType", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Account>accounts = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "AccountType{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

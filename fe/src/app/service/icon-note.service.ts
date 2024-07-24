@@ -15,8 +15,12 @@ export class IconNoteService {
     return this.httpClient.post<IconNote>(this.apiUrl, iconNote);
   }
 
-  getAllIconNote():Observable<IconNote[]> {
-    return this.httpClient.get<IconNote[]>(this.apiUrl);
+  getIconNoteById(id:number):Observable<IconNote> {
+    return this.httpClient.get<IconNote>(this.apiUrl+'/'+String(id));
+  }
+
+  getAllIconNoteByUsername(username:string):Observable<IconNote[]> {
+    return this.httpClient.get<IconNote[]>(this.apiUrl+"?username="+String(username));
   }
 
   deleteIconNote(id:number):Observable<void> {

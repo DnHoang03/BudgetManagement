@@ -1,67 +1,75 @@
 <div class="container">
-    <table>
-        <tr>
-            <td>
-                <div class="name-account">
-                    <div>{{account.name}}</div>
-                    <div class="note">{{account.note}}</div>
+    <div class="account-detail">
+        <div class="account-name">
+            <p>{{account.name}}</p>
+            <p style="font-weight: 300; font-size: small;">{{account.note}}</p>
+        </div>
+        <div class="contain-icon">
+            <i [class]="'icon '+ account.iconName"></i>
+        </div>
+        <div class="amount">
+            {{account.amount + ' ' + account.currencyName}}
+        </div>
+    </div>
+    <div class="pick-date">
+        <mat-form-field class="pick-month">
+            <mat-label>Tháng</mat-label>
+            <mat-select [(value)]="currentMonth" (valueChange)="getTransaction()">
+                <mat-option *ngFor="let x of months" [value]="x">{{x+1}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="pick-year">
+            <mat-label>Năm</mat-label>
+            <mat-select [(value)]="currenYear" (valueChange)="getTransaction( )">
+                <mat-option *ngFor="let x of years" [value]="x">{{x}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="transactions">
+        @for (transactions of transactionList; track $index) {
+        <p class="date">
+            {{getDate(transactions.date!) + ' thg ' + (getMonth(transactions.date!)) + ' ' +
+            day[getDay(transactions.date!)]}}
+        </p>
+        @for(transaction of transactions.transactions; track $index) {
+        @if (transaction.type == 'TRANSFER') {
+        <div class="transaction-list">
+            <div class="transaction-list-icon">
+                <i class="fas fa-exchange-alt trans-icon"></i>
+            </div>
+            <div class="transaction-list-name">
+                <div>{{transaction.transferAccountName + ' '}}
+                    <i class="fas fa-long-arrow-alt-right"></i>{{' ' + transaction.receiveAccountName}}
                 </div>
-            </td>
-            <td class="table-custom">
-                <i [class]="account.iconName + ' icon'"></i>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div class="amount">
-                    {{account.amount}}
-                </div>
-            </td>
-            <td class="table-custom">
-                <i class="fas fa-pen edit" (click)="setAmount()"></i>
-            </td>
-        </tr>
-        <app-input *ngIf="isAmountSelected" (ans)="bindVal($event)"></app-input>
-        <tr>
-            <mat-form-field>
-                <mat-label>Value binding</mat-label>
-                <input matInput [matDatepicker]="picker3" [value]="pickedDate" (change)="getTransaction()">
-                <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
-                <mat-datepicker #picker3></mat-datepicker>
-              </mat-form-field>
-        </tr>
-    </table>
-    <table>
-        <tr *ngFor="let transaction of transactions" class="transactions-list">
-            <td>
-                <div *ngIf="transaction.type == 'TRANSFER'">
-                    <i class="far fa-handshake icon"></i>
-                </div>
-                <div *ngIf="transaction.type != 'TRANSFER'">
-                    <i [ngClass]="transaction.iconNoteName + ' icon'"></i>
-                </div>
-            </td>
-            <td>
-                <div *ngIf="transaction.type == 'TRANSFER'">
-                    <p class="transactions">{{transaction.transferAccountName}} 
-                        <i class="fas fa-arrow-right"></i>
-                        {{transaction.receiveAccountName}}
-                    </p>
-                </div>
-                <div *ngIf="transaction.type != 'TRANSFER'">
-                    <p class="transactions">{{transaction.iconNoteName}}</p>
-                </div>
-            </td>
-            <td>
-                <p class="transactions-date">
-                    {{(transaction.createdAt|date:'dd/MM/yyyy')}}
-                </p>
-            </td>
-            <td>
-                <p class="transactions-amount">
-                    {{transaction.amount}}
-                </p>
-            </td>
-        </tr>
-    </table>
+            </div>
+            @if (transaction.transferAccountId == account.id) {
+                <div class="transaction-list-amount">{{'-'+transaction.amount + ' ' + account.currencyName}}</div>
+            }
+            @else {
+                <div class="transaction-list-amount">{{transaction.receiveAmount + ' ' + account.currencyName}}</div>
+            }
+        </div>
+        }
+        @else {
+        <div class="transaction-list">
+            <div class="transaction-list-icon">
+                <i [class]="'icon ' + transaction.iconName"></i>
+            </div>
+            <div class="transaction-list-name">
+                {{transaction.iconNoteName}}
+            </div>
+            @if (transaction.type == 'COST') {
+                <div class="transaction-list-amount">{{'-'+transaction.amount + ' ' + account.currencyName}}</div>
+            } 
+            @else {
+                <div class="transaction-list-amount">{{transaction.amount + ' ' + account.currencyName}}</div>
+            }
+            
+        </div>
+        }
+        }
+
+        }
+    </div>
 </div>

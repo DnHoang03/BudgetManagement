@@ -18,6 +18,11 @@ export class AuthService {
     return this.httpClient.post<AuthResponse>(this.apiUrl + '/login', login);
   }
 
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login'])
+  }
+
   isTokenExpired(): boolean {
     const token = localStorage.getItem('token');
     if (!token) return true;
@@ -28,12 +33,19 @@ export class AuthService {
     return (expirationDate < now);
   }
 
-  logout() {
-    localStorage.removeItem('token')
-  } 
+  getUsername():string {
+    const token = localStorage.getItem('token');
+    if(!token) return '';
+    const decodedToken = jwtDecode(token);
+    return decodedToken.sub!;
+  }
 
   refreshToken() {
     localStorage.removeItem('token')
     this.router.navigate(['/login'])
+  }
+
+  getToken() {
+    return localStorage.getItem('token')
   }
 }

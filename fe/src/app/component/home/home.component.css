@@ -1,37 +1,130 @@
 .container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    width: 650px;
+    width: 100%;
     height: 100%;
-    gap: 20px;
-    padding: 20px;
+    padding: 15px;
+    margin-top: 15px;
+    color: white;
+    box-sizing: border-box;
+}
+
+
+.statistic {
+    width: 100%;
+    border: 1px solid wheat;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.header-statistic {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     color: white;
 }
 
-.title {
-    font-size: medium;
-    font-weight: 300;
-}
 
-
-.tr-fee {
-    text-align: center;
-    /* Căn giữa các phần tử */
-    align-items: center;
-    width: 30%;
+.content {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 100%;
 }
 
 .date-picker {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-column: 1/2;
+    padding: 5px;
+    cursor: pointer;
+}
+
+
+.statistic-cost {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-column: 2/4;
+    padding: 5px;
+}
+
+.statistic-income {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-column: 4/6;
+    padding: 5px;
+}
+
+.statistic-element-title {
+    color: rgb(111, 111, 111);
+    grid-row: 1/2;
+}
+
+.statistic-element-value {
+    grid-row: 2/3;
+}
+
+.transaction-list {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+
+.transaction-list-row {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 10px;
+    border-bottom: 1px solid white;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.transaction-list-row:hover {
+    background-color: rgb(59, 57, 53);
+}
+
+.transaction-list-date-row {
+    color: rgb(111, 111, 111);
+    font-size: smaller;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 10px;
+    border-bottom: 1px solid white;
+    width: 100%;
+    height: 100%;
+}
+
+.transaction-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #000;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: larger;
+    cursor: pointer;
+    background-color: rgb(189, 189, 17);
+    color: rgb(5, 5, 5);
+}
+
+.transaction-name {
+    grid-column: 2/5;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
 }
-.example-month-picker .mat-calendar-period-button {
-    display: none;
-  }
-  .example-month-picker .mat-calendar-next-button,
-  .example-month-picker .mat-calendar-previous-button {
-    display: none;
-  }
-  
+
+.transaction-amount {
+    grid-column: 5/8;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}

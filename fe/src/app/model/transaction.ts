@@ -3,6 +3,7 @@ export interface Transaction {
     name?:string,
     type?:string,
     amount?:number,
+    receiveAmount?:number,
     createdAt?:Date,
     iconNoteId?:number,
     iconNoteName?:string,
@@ -10,4 +11,5 @@ export interface Transaction {
     receiveAccountId?:number,
     transferAccountName?:string,
     receiveAccountName?:string
+    iconName?:string
 };

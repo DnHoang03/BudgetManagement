@@ -1,0 +1,20 @@
+<div class="top-toolbar">
+    <img src="logo.png" class="toolbar-img">
+    <a routerLink="/home" [class]="'toolbar-item '+((state=='home')?'toolbar-item-clicked':'')"
+        (click)="setState('home')">
+        Trang chủ
+    </a>
+    <a routerLink="/profile" [class]="'toolbar-item '+((state=='profile')?'toolbar-item-clicked':'')"
+        (click)="setState('profile')">Hồ
+        sơ</a>
+    <a routerLink="/chart" [class]="'toolbar-item '+((state=='chart')?'toolbar-item-clicked':'')"
+        (click)="setState('chart')">Biểu
+        đồ</a>
+    <a routerLink="/report/analyse" [class]="'toolbar-item '+((state=='report')?'toolbar-item-clicked':'')"
+        (click)="setState('report')">Báo
+        cáo</a>
+    <a routerLink="/add-notes" [class]="'toolbar-item '+((state=='add-notes')?'toolbar-item-clicked':'')"
+        (click)="setState('add-notes')">
+        <i class="fas fa-plus"></i>
+    </a>
+</div>

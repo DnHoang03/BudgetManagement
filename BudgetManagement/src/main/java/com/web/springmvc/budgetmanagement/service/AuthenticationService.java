@@ -9,6 +9,7 @@ import com.web.springmvc.budgetmanagement.model.User;
 import com.web.springmvc.budgetmanagement.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -40,8 +41,7 @@ public class AuthenticationService {
                         request.getPassword()
                 )
         );
-        User user = userRepository.findByUsername(request.getUsername()).orElseThrow(()-> new ResourceNotFoundException("Not found user"));
-        String token = jwtService.generateToken(user.getUsername());
+        String token = jwtService.generateToken(request.getUsername());
         return AuthenticationResponse.builder().token(token).build();
     }
 }

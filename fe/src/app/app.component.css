@@ -1,56 +1,11 @@
 .bg {
     background-color: rgb(32, 25, 30);
     width: 100%;
-    min-height: 850px;
+    min-height: 100vh;
     box-sizing: border-box;
+    /* overflow: hidden; */
 }
 
-.top-toolbar {
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-    padding: 8px 16px;
-    background-color: rgb(120, 22, 55);
-    z-index: 9999;
-    position: fixed;
-}
-
-.toolbar-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 15px;
-    cursor: pointer;
-    font-family: Roboto, sans-serif;
-    width: 100px;
-    height: 40px;
-    min-width: 100px;
-    min-height: 40px; 
-    transition: transform 0.1s ease;
-    word-wrap: break-word; 
-    margin-left: 10px;
-}
-
-.toolbar-img {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 15px;
-    width: 50px;
-    height: 40px;
-}
-
-.toolbar-item:hover {
-    background-color: rgb(137, 52, 80);
-    box-shadow: 0 6px 8px rgba(0, 2, 0, 0.1);
-    transform: scale(1.05); 
-}
-
-.toolbar-item-clicked {
-    background-color: rgb(137, 52, 80);
-    box-shadow: 0 6px 8px rgba(0, 2, 0, 0.1);
-    transform: scale(1.05);
-}
 
 a {
     text-decoration: none;
@@ -60,11 +15,12 @@ a {
 .content {
     background-color: #333;
     position: relative;
-    top:50px;
-    min-height: 800px;
+    justify-content: center;
     height: 100%;
     margin: 0 20%;
+    padding-top: 10px;
     border-left: 1px solid white; /* Viền bên trái */
     border-right: 1px solid white; /* Viền bên phải */
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5), -5px -5px 10px rgba(0, 0, 0, 0.5) inset;
+    box-sizing: border-box;
 }

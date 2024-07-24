@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.*;
 public class UsersController {
     private final UsersService usersService;
 
-
+    @GetMapping
+    public ResponseEntity<UsersDto> getUserByUsername(@RequestParam(value = "username", required = true) String username) {
+        return ResponseEntity.ok(usersService.getUserByUsername(username));
+    }
     @PutMapping("/{id}")
     public ResponseEntity<UsersDto> updateUser(@PathVariable("id") Long id, @RequestBody UsersDto usersDto) {
         return ResponseEntity.ok(usersService.updateUser(id, usersDto));

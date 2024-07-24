@@ -3,6 +3,7 @@ import { IconNote } from '../../../model/iconNote';
 import { IconNoteService } from '../../../service/icon-note.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteComponent } from '../../../share/dialog/delete/delete.component';
+import { AuthService } from '../../../service/auth.service';
 
 @Component({
   selector: 'app-setting-icon-note',
@@ -13,9 +14,10 @@ export class SettingIconNoteComponent implements OnInit{
   iconNotes:IconNote[] = [];
   type:string = "COST";
   readonly dialog = inject(MatDialog);
-  constructor(private iconNoteService:IconNoteService) {}
+  constructor(private iconNoteService:IconNoteService, private authService:AuthService) {}
   ngOnInit(): void {
-    this.iconNoteService.getAllIconNote().subscribe(iconNotes => {
+    this.iconNoteService.getAllIconNoteByUsername(this.authService.getUsername()).subscribe(iconNotes => {
+      console.log(iconNotes);
       this.iconNotes = iconNotes;
     })
   }

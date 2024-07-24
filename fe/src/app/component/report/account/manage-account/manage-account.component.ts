@@ -1,8 +1,9 @@
-import { AfterContentInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Account } from '../../../../model/account';
 import { AccountService } from '../../../../service/account.service';
-import { Icon } from '../../../../model/icon';
 import { IconService } from '../../../../service/icon.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteComponent } from '../../../../share/dialog/delete/delete.component';
 
 @Component({
   selector: 'app-manage-account',
@@ -11,7 +12,9 @@ import { IconService } from '../../../../service/icon.service';
 })
 export class ManageAccountComponent implements OnInit{
   accounts!:Account[];
-  constructor(private accountService:AccountService, private iconService:IconService) {}
+  constructor(private accountService:AccountService
+    , private iconService:IconService
+    , private dialog:MatDialog) {}
 
 
   ngOnInit(): void {
@@ -21,14 +24,20 @@ export class ManageAccountComponent implements OnInit{
     })
   }
 
-  deleteAccount(id:number) {
-    this.accountService.deleteAccount(id).subscribe();
-    for(let i = 0; i < this.accounts.length; i++) {
-      if(this.accounts[i].id == id) {
-        this.accounts.splice(i, 1);
-        break;
+
+  openDialog(id:number) {
+    const dialogRef = this.dialog.open(DeleteComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if(result === 'confirm') {
+        this.accountService.deleteAccount(id).subscribe();
+        for(let i = 0; i < this.accounts.length; i++) {
+          if(this.accounts[i].id == id) {
+            this.accounts.splice(i, 1);
+            break;
+          }
+        }
       }
-    }
+    })
   }
 
 }
